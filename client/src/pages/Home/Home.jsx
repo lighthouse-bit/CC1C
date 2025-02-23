@@ -78,7 +78,7 @@ const Home = () => {
                     Augue ac feugiat volutpat a lorem elit id dolor. Elit duis egestas
                     eros odio libero sit. Dignissim viverra at magna sed sapien urna
                     adipiscing nisl. Enim et et enim nibh ut placerat. Eget elit in quam
-                    dignissim amet. Gravida et augue ut risus adipiscing orci viverra
+                    dignissim amet. Gravida et augue ut risus adipiscing orcddfi viverra
                     posuere.
                     </p>
                 </div>

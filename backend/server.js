@@ -1,8 +1,6 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const cors = require('cors');
 const pool = require('./Database/database');
-const multer = require("multer");
 const path = require("path");
 require('dotenv').config();
 
@@ -29,6 +27,20 @@ app.get("/api/roles", async (req, res) => {
     
   } catch (err) {
     console.error(err);
+    res.status(500).send("Server error");
+  }
+});
+
+app.get("/api/roles/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const result = await pool.query("SELECT * FROM roles WHERE id = $1", [id]);
+    if (result.rows.length === 0) {
+      return res.status(404).json({ message: "Team member not found" });
+    }
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error("Error fetching team member:", err);
     res.status(500).send("Server error");
   }
 });

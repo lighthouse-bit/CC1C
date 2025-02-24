@@ -53,8 +53,8 @@ const Programs = () => {
                 <img src={program.image} alt={program.title} className="w-full h-48 object-cover" />
                 <div className="p-4 text-center">
                   <p className="text-gray-600">{program.date}</p>
-                  <h3 className="font-semibold text-lg">{program.title}</h3>
-                  <button className="mt-3 text-blue-600 font-semibold">Learn More</button>
+                  <h3 className="font-semibold text-lg text-[#052F6B]">{program.title}</h3>
+                  <button className="mt-3 text-[#052F6B80] font-semibold">Learn More</button>
                 </div>
               </div>
             </SwiperSlide>

@@ -27,7 +27,7 @@ const VisionMission = () => {
         {/* Objectives Section */}
       <div className="mt-12">
             <h2 className="text-xl font-bold text-blue-900">OUR OBJECTIVES</h2>
-            <ul className="mt-4 space-y-3">
+            <ul className="mt-4 space-y-3 ">
             {[
                 "To improve awareness and awareness of Climate justice, Gender and Social inclusion, WASH, Economic justice, Education, Health, Agriculture amongst citizens.",
                 "To provide sustainable development (Appropriate technology and development).",
@@ -41,7 +41,7 @@ const VisionMission = () => {
                 "To create opportunities and express their abilities and skills by empowering them in their decision making.",
             ].map((objective, index) => (
                 <li key={index} className="flex items-start">
-                <span className="text-blue-900 text-lg mr-2">●</span>
+                <span className="text-blue-900 text-sm mr-2">●</span>
                 <span>{objective}</span>
                 </li>
             ))}
@@ -88,7 +88,7 @@ const VisionMission = () => {
               <ul className="mt-2 space-y-2">
                 {pillar.points.map((point, idx) => (
                   <li key={idx} className="flex items-start">
-                    <span className="text-blue-900 text-lg mr-2">●</span>
+                    <span className="text-blue-900 text-sm mr-2">●</span>
                     <span>{point}</span>
                   </li>
                 ))}

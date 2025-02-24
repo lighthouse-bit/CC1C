@@ -46,8 +46,8 @@ const Footer = () => {
         </div>
 
         {/* Contact Section */}
-        <div>
-            <img src={rounded} alt="" />
+        <div className="text-center md:text-left">
+            <img src={rounded} alt="" className="w-24 md:w-32 mx-auto md:mx-0 mb-4" />
           <p>Phone: (+232) 346-122-95</p>
           <p>(+1) 301-245-7892</p>
           <p>Email: info@ccisimpact.org</p>
@@ -56,9 +56,9 @@ const Footer = () => {
       </div>
       
       {/* Lower Footer */}
-      <div className="bg-[#02193A] mt-6 border-t border-blue-500 items-center py-4 text-center h-[80px] text-sm md:flex md:justify-between md:px-10">
+      <div className="bg-[#02193A] mt-6 border-t border-blue-500 py-4 text-center text-sm flex flex-col md:flex-row items-center md:justify-between md:px-10 h-auto md:h-[80px]">
         <p>Copyright 2025 CCIS All Rights Reserved</p>
-        <div className="flex justify-center space-x-6">
+        <div className="flex flex-col md:flex-row justify-center md:justify-start gap-2 md:gap-6 mt-2 md:mt-0">
           <p>Privacy policy</p>
           <p>Terms of Service and Agreement</p>
         </div>

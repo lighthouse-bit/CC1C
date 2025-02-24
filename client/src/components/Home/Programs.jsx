@@ -48,10 +48,12 @@ const Programs = () => {
           className="w-full"
         >
           {programs.map((program, index) => (
-            <SwiperSlide key={index} className="flex justify-center">
-              <div className="bg-white text-black rounded-lg overflow-hidden shadow-lg max-w-sm">
+            <SwiperSlide key={index} className="flex justify-center px-4 pb-16"
+            
+            >
+              <div className="bg-white text-black rounded-lg overflow-hidden shadow-lg max-w-sm sm:max-w-sm space-y-4">
                 <img src={program.image} alt={program.title} className="w-full h-48 object-cover" />
-                <div className="p-4 text-center">
+                <div className="p-4 text-center space-y-2">
                   <p className="text-gray-600">{program.date}</p>
                   <h3 className="font-semibold text-lg text-[#052F6B]">{program.title}</h3>
                   <button className="mt-3 text-[#052F6B80] font-semibold">Learn More</button>

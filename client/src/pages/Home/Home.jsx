@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Carousel from '../../components/Home/Carousel'
-import founder from '../../assets/founder.png'
+// import founder from '../../assets/founder.png'
 import donate from '../../assets/donate.png'
 import Programs from '../../components/Home/Programs'
 import VisionMision from '../../components/Home/VisionMision'
@@ -8,21 +8,18 @@ import ContactForm from '../../components/Home/ContactForm'
 import PartnersSection from '../../components/Home/PartnersSection'
 
 const Home = () => {
-    const [teamMembers, setTeamMembers] = useState([]);
-    const [founder, setFounder] = useState(null); // Store the founder separately
+    const [founder, setFounder] = useState(null);
 
     useEffect(() => {
-        fetch("http://localhost:5000/api/roles")
-        .then((response) => response.json())
-        .then((data) => {
-            setTeamMembers(data);
-
-            // Find the founder (or CEO) dynamically
-            const founderData = data.find((member) => member.role_name.toLowerCase() === "ceo");
-            setFounder(founderData);
-        })
-        .catch((error) => console.error("Error fetching team members:", error));
-    }, []);
+        const roleName = encodeURIComponent("Founder and CEO "); // Encode spaces
+        fetch(`http://localhost:5000/api/roles/role/${roleName}`)
+          .then((response) => response.json())
+          .then((data) => {
+            console.log("Fetched Founder:", data);
+            setFounder(data);
+          })
+          .catch((error) => console.error("Error fetching founder:", error));
+      }, []);
   return (
     <div >
         <Carousel />
@@ -50,16 +47,17 @@ const Home = () => {
                 </button>
             </div>
 
+            {founder && (
             <div className=' p-6'><div className="max-w-6xl mx-auto bg-[#052F6B33]   p-6 rounded-2xl mb-20 flex flex-col md:flex-row items-center md:items-start shadow-lg">
                 {/* Image Section */}
                 <div className="md:w-1/3 flex flex-col items-center text-center">
                     <img
-                    src={founder} 
+                    src={`http://localhost:5000${founder.image_path}`} 
                     alt="Founder"
                     className="w-40 h-40 rounded-full object-cover border-4 border-white shadow-md"
                     />
-                    <p className="mt-3 text-gray-600">Lorem ipsum dolor</p>
-                    <p className="font-bold">CEO/FOUNDER</p>
+                    <p className="mt-3 text-gray-600">{founder.person_name}</p>
+                    <p className="font-bold">{founder.role_name}</p>
                 </div>
 
                 {/* Text Section */}
@@ -83,7 +81,7 @@ const Home = () => {
                     </p>
                 </div>
             </div></div>
-            
+             )}
 
             <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between p-8">
                 {/* Text Section */}

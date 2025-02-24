@@ -1,19 +1,33 @@
-import React from "react";
-import founder from "../../../assets/founder.png";
+import React, { useEffect, useState } from "react";
+// import founder from "../../../assets/founder.png";
 
 const FounderMessage = () => {
+      const [founder, setFounder] = useState(null);
+  
+      useEffect(() => {
+          const roleName = encodeURIComponent("Founder and CEO "); // Encode spaces
+          fetch(`http://localhost:5000/api/roles/role/${roleName}`)
+            .then((response) => response.json())
+            .then((data) => {
+              console.log("Fetched Founder:", data);
+              setFounder(data);
+            })
+            .catch((error) => console.error("Error fetching founder:", error));
+        }, []);
     return (
       <section className="max-w-4xl mx-auto py-12 px-4 text-center">
         {/* Profile Image */}
+        {founder && (
         <div className="flex flex-col items-center">
           <img
-            src={founder}
+            src={`http://localhost:5000${founder.image_path}`} 
             alt="Founder"
             className="w-40 h-40 rounded-full object-cover shadow-lg"
           />
-          <p className="mt-3 text-gray-700">Lorem ipsum dolor</p>
-          <p className="font-bold text-gray-900">CEO/FOUNDER</p>
+          <p className="mt-3 text-gray-700">{founder.person_name}</p>
+          <p className="font-bold text-gray-900">{founder.role_name}</p>
         </div>
+        )}
   
         {/* Message Heading */}
         <h2 className="mt-6 text-xl font-bold text-blue-900 uppercase  pb-2">

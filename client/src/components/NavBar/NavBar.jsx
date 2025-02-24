@@ -118,6 +118,18 @@ const NavBar = () => {
                 <li className="hover:bg-gray-100 px-4 py-2">
                   <Link to="programs/local-conference">Local Conference of Youth(LCOY)</Link>
                 </li>
+                <li className="hover:bg-gray-100 px-4 py-2">
+                  <Link to="programs/youth-consultation">Youth Virtual Consultations</Link>
+                </li>
+                <li className="hover:bg-gray-100 px-4 py-2">
+                  <Link to="programs/affoerestation-projects">Afforestation projects in Zambia</Link>
+                </li>
+                <li className="hover:bg-gray-100 px-4 py-2">
+                  <Link to="programs/hygiene-programs">Hygiene management Program</Link>
+                </li>
+                <li className="hover:bg-gray-100 px-4 py-2">
+                  <Link to="programs/leadership-program">Leadership Program in York Village</Link>
+                </li>
               </ul>
             )}
           </li>

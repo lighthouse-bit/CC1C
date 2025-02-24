@@ -53,7 +53,7 @@ const Carousel = () => {
       >
         {slides.map((slide, index) => (
           <SwiperSlide key={index}>
-            <div className="relative w-full h-[500px]">
+            <div className="relative w-full h-[300px] md:h-[500px]">
               <img
                 src={slide.image}
                 alt="Slide"

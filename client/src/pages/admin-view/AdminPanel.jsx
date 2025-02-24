@@ -1,5 +1,5 @@
 import React from "react";
-import SideBar from "@/components/admin-view/sidebar";
+import SideBar from "@/components/admin-view/SideBar";
 import Navbar from "@/components/admin-view/Navbar";
 import DashboardCards from "@/components/admin-view/DashboardCards";
 import Updates from "@/components/admin-view/Updates.";

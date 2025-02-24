@@ -45,6 +45,25 @@ app.get("/api/roles/:id", async (req, res) => {
   }
 });
 
+app.get("/api/roles/role/:role_name", async (req, res) => {
+  const { role_name } = req.params;
+  try {
+    const result = await pool.query(
+      "SELECT * FROM roles WHERE LOWER(role_name) = LIKE  LOWER($1)",
+      [`%${role_name}%`] 
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ message: "Role not found" });
+    }
+
+    res.json(result.rows[0]); // Return the first matching role
+  } catch (err) {
+    console.error("Error fetching role:", err);
+    res.status(500).send("Server error");
+  }
+});
+
 
 
 const PORT = process.env.PORT || 5000;

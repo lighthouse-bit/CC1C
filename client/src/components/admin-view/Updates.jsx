@@ -6,7 +6,7 @@ const Updates = () => {
     ];
   
     return (
-      <div className="bg-white p-4 shadow-md rounded-md">
+      <div className="bg-white p-4 shadow-md rounded-md mb-20">
         <h2 className="text-lg font-bold">Latest Updates</h2>
         {updates.map(({ time, message }, index) => (
           <div key={index} className="border-b py-2">

@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
@@ -17,32 +16,26 @@ const Carousel = () => {
     {
       image: carousel1,
       text: "MOBILIZING AND EQUIPPING YOUNG PEOPLE TO ENGAGE IN POLICY MAKING AND DEVELOPMENT PROCESSES",
-      url: "programs/women-in-climate-resilience"
     },
     {
       image: carousel2,
       text: "Promoting women’s empowerment and leadership in climate resilience and peacebuilding",
-      url: "programs/youth-leadership"
     },
     {
       image: carousel3,
       text: "Partnering with local stakeholders to address climate-induced challenges in agriculture, energy and water resources",
-      url: "programs/local-conference"
     },
     {
       image: carousel4,
       text: "Supporting skill development for youth and women to enhance their impact and sustainability",
-      url: "programs/affoerestation-projects"
     },
     {
       image: carousel5,
       text: "Building capacity through leadership training, mentorship and advocacy programs.",
-      url: "programs/youth-consultation"
     },
     {
       image: carousel6,
       text: "Advocating for policies and initiatives that combat gender-based violence and discrimination.",
-      url: "programs/leadership-program"
     },
   ];
 
@@ -70,11 +63,10 @@ const Carousel = () => {
                 <h2 className="text-white text-center text-lg md:text-2xl font-bold">
                   {slide.text}
                 </h2>
-                <Link to={slide.url}>
+
                 <button className="bg-[#052F6B] text-white mt-8 px-6 py-3 rounded-md text-sm md:text-base font-semibold hover:bg-blue-600 transition duration-300">
                   Get Involved
                 </button>
-                </Link>
               </div>
             </div>
           </SwiperSlide>

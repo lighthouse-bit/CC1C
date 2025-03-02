@@ -1,11 +1,14 @@
-const {Pool} = require('pg');
+const { Pool } = require("pg");
 
 const pool = new Pool({
-    connectionString: process.env.DATABASE_URL, 
-    ssl: {
-      rejectUnauthorized: false, 
-    },
-  });
+  connectionString: "postgresql://postgres:root@fxvvrieqefxovspeveba.supabase.co:5432/postgres",
+  ssl: { rejectUnauthorized: false },
+});
 
-
-module.exports = pool;
+pool.query("SELECT NOW()", (err, res) => {
+  if (err) {
+    console.error("Database connection error:", err);
+  } else {
+    console.log("Connected to database:", res.rows);
+  }
+});

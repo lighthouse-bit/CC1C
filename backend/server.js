@@ -8,7 +8,11 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
-app.use(cors({ origin: "http://localhost:5173" }));
+app.use(cors({
+  origin: ["http://localhost:5173", "https://cc-1-c-frontend-363mifll1-ccis.vercel.app"],
+  credentials: true 
+}));
+
 app.use(express.json());
 
 // Set up static folder to serve uploaded files

@@ -11,7 +11,7 @@ const Home = () => {
     const [founder, setFounder] = useState(null);
 
     useEffect(() => {
-        const roleName = encodeURIComponent("Founder and CEO "); // Encode spaces
+        const roleName = encodeURIComponent("Founder and CEO "); // Encodde spaces
         fetch(`http://localhost:5000/api/roles/role/${roleName}`)
           .then((response) => response.json())
           .then((data) => {

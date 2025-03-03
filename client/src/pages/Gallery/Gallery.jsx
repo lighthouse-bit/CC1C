@@ -10,7 +10,7 @@ const Gallery = () => {
   const [images, setImages] = useState([]);
 
   useEffect(() => {
-    fetch(`${API_BASE_URL}/api/roles`) 
+    fetch(`${API_BASE_URL}/api/gallery`) 
       .then((response) => response.json())
       .then((data) => setImages(data))
       .catch((error) => console.error("Error fetching gallery images:", error));

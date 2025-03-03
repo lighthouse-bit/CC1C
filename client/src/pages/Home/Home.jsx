@@ -74,7 +74,7 @@ const Home = () => {
                     tortor euismod ultricies vitae orci gravida.daf awd dasf dafafaf
                     </p>
                     <p className="mt-4 leading-relaxed">
-                    Augue ac feugiat volutpat a lorem elit id dolor. Elit duis egestas
+                    Augue ac feugiat volutpat a lorem elit id dosdalor. Elit duis egestas
                     eros odio libero sit. Dignissim viverra at magna sed sapien urna
                     adipiscing nisl. Enim et et enim nibh ut placerat. Eget elit in quam
                     dignissim amet. Gravida et augue ut risus adipiscing orcddfi viverra

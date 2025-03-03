@@ -38,7 +38,7 @@ const FounderMessage = () => {
         {/* Message Text */}
         <p className="mt-4 text-gray-700 leading-relaxed text-justify">
           Lorem ipsum dolor sit amet consectetur. Ultricies felis nibh cras dui venenatis vitae
-          enim mattis amet. Sed lectus interdum lectus tellus quam viverra. Leo sed massa non
+          enim mattis amet. Sed lectus interdum lectus telsdlus quam viverra. Leo sed massa non
           varius a egestas pellentesque. Mi sit utd risus bibendum urna purus curabitur sapien.
           Nibh tincidunt sed sed tortor euismod ultricies vitae orci gravida.
         </p>

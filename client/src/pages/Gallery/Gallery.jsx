@@ -4,12 +4,14 @@ const categories = [
   "All Photos", "Farm Programs", "Students", "Donors and Partners", "Events", "Trainings"
 ];
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
 const Gallery = () => {
   const [selectedCategory, setSelectedCategory] = useState("All Photos");
   const [images, setImages] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/gallery`,{
+    fetch(`${API_BASE_URL}/api/gallery`,{
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -42,7 +44,7 @@ const Gallery = () => {
       </div>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {filteredImages.map((img, index) => (
-          <img key={index} src={`http://localhost:5000${img.image_path}`} alt="Gallery" className="w-full h-auto rounded-md shadow-md" />
+          <img key={index} src={`${API_BASE_URL}${img.image_path}`} alt="Gallery" className="w-full h-auto rounded-md shadow-md" />
         ))}
       </div>
     </div>

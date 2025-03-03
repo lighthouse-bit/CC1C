@@ -178,13 +178,13 @@ const NavBar = () => {
         </ul>
 
         {/* Donate Now Button - Desktop */}
-        <div className="hidden md:block">
+        
+        <div className="hidden md:block"><Link to="/donate">
           <button
             className="bg-[#052F6B] text-white px-4 py-2 rounded-md hover:bg-blue-600"
-            onClick={() => window.location.href = "/donate"}
           >
             Donate Now
-          </button>
+          </button></Link>
         </div>
       </div>
     </nav>

@@ -13,7 +13,7 @@ const MeetOurTeam = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      mode: "cors", // Ensures CORS handling
+      mode: "cors", 
     }) 
       .then((response) => response.json())
       .then((data) => setTeamMembers(data))

@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom"; // Import Link for navigation
+import API_BASE_URL from "../../../../config";
 
 const MeetOurTeam = () => {
   const [teamMembers, setTeamMembers] = useState([]);
 
   useEffect(() => {
     
-    fetch("http://localhost:5000/api/roles") 
+    fetch(`${API_BASE_URL}/api/roles`) 
       .then((response) => response.json())
       .then((data) => setTeamMembers(data))
       .catch((error) => console.error("Error fetching team members:", error));
@@ -14,7 +15,7 @@ const MeetOurTeam = () => {
 
   return (
     <section className="max-w-6xl mx-auto py-12 px-4">
-      <h2 className="text-2xl font-bold text-blue-900 text-center uppercase border-b pb-2">
+      <h2 className="text-2xl font-bold text-blue-9jh00 text-center uppercase border-b pb-2">
         MEET OUR TEAM
       </h2>
 
@@ -23,7 +24,7 @@ const MeetOurTeam = () => {
         {teamMembers.map((member) => (
           <div key={member.id} className="flex flex-col items-center text-center">
             <img
-              src={`http://localhost:5000${member.image_path}`}
+              src={`${API_BASE_URL}${member.image_path}`}
               alt={member.person_name}
               className="w-40 h-40 rounded-full object-cover shadow-lg"
             />

@@ -6,13 +6,14 @@ import Programs from '../../components/Home/Programs'
 import VisionMision from '../../components/Home/VisionMision'
 import ContactForm from '../../components/Home/ContactForm'
 import PartnersSection from '../../components/Home/PartnersSection'
+import API_BASE_URL from '../../../config'
 
 const Home = () => {
     const [founder, setFounder] = useState(null);
 
     useEffect(() => {
-        const roleName = encodeURIComponent("Founder and CEO "); // Encode spaces
-        fetch(`http://localhost:5000/api/roles/role/${roleName}`)
+        const roleName = encodeURIComponent("Founder and CEO"); // Encode spaces
+        fetch(`${API_BASE_URL}/api/roles/role/${roleName}`)
           .then((response) => response.json())
           .then((data) => {
             console.log("Fetched Founder:", data);
@@ -40,7 +41,7 @@ const Home = () => {
                     With operations spanning multiple countries including Sierra Leone, CCIS
                     champions innovative solutions to ensure marginalized groups—particularly
                     women, girls, and youth—are at the forefront of decision-making processes
-                    and sustainable development efforts.
+                    and sustainable development efforts..
                 </p>
                 <button className="mt-6 bg-[#052F6B] text-white px-6 py-3 rounded-md text-lg font-semibold shadow-md hover:bg-blue-800 transition">
                     Learn more
@@ -52,7 +53,7 @@ const Home = () => {
                 {/* Image Section */}
                 <div className="md:w-1/3 flex flex-col items-center text-center">
                     <img
-                    src={`http://localhost:5000${founder.image_path}`} 
+                    src={`${API_BASE_URL}${founder.image_path}`} 
                     alt="Founder"
                     className="w-40 h-40 rounded-full object-cover border-4 border-white shadow-md"
                     />
@@ -67,8 +68,8 @@ const Home = () => {
                     </h2>
                     <p className="mt-3 leading-relaxed">
                     Lorem ipsum dolor sit amet consectetur. Ultricies felis nibh cras dui
-                    venenatis vitae enim mattis amet. Sed lectus interdum lectus tellus
-                    quam viverra. Leo sed massa non varius a egestas pellentesque. Mi sit
+                    venenatis vitae enim mattis amdet. Sed lectus interdum lectus tellus
+                    quam viverra. Leo sed massac non varius a egestjhas pellentesque. Mi sit
                     ut risus bibendum urna purus curabitur sapien. Nibh tincidunt sed sed
                     tortor euismod ultricies vitae orci gravida.daf awd dasf dafafaf
                     </p>

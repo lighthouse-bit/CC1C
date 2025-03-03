@@ -14,7 +14,13 @@ const Home = () => {
 
     useEffect(() => {
         const roleName = encodeURIComponent("Founder and CEO"); // Encodde spaces
-        fetch(`${API_BASE_URL}/api/roles/role/${roleName}`)
+        fetch(`${API_BASE_URL}/api/roles/role/${roleName}`,{
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            mode: "cors", 
+          })
           .then((response) => response.json())
           .then((data) => {
             console.log("Fetched Founder:", data);

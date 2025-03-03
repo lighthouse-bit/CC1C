@@ -8,7 +8,13 @@ const MeetOurTeam = () => {
 
   useEffect(() => {
     
-    fetch("${API_BASE_URL}/api/roles") 
+    fetch(`${API_BASE_URL}/api/roles`,{
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      mode: "cors", // Ensures CORS handling
+    }) 
       .then((response) => response.json())
       .then((data) => setTeamMembers(data))
       .catch((error) => console.error("Error fetching team members:", error));

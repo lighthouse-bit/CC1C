@@ -8,7 +8,13 @@ const FounderMessage = () => {
   
       useEffect(() => {
           const roleName = encodeURIComponent("Founder and CEO "); // Encode spaces
-          fetch(`${API_BASE_URL}/api/roles/role/${roleName}`)
+          fetch(`${API_BASE_URL}/api/roles/role/${roleName}`,{
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            mode: "cors", // Ensures CORS handling
+          })
             .then((response) => response.json())
             .then((data) => {
               console.log("Fetched Founder:", data);

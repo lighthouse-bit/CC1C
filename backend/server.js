@@ -8,7 +8,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
-const allowedOrigins = ["https://cc-1-c-xi.vercel.app", "http://localhost:5173"];
+const allowedOrigins = ["https://cc-1-c.vercel.app", "http://localhost:5173"];
 
 app.use(cors({
     origin: function (origin, callback) {

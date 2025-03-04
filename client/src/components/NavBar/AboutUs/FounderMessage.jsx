@@ -7,7 +7,7 @@ const FounderMessage = () => {
       const [founder, setFounder] = useState(null);
   
       useEffect(() => {
-          const roleName = encodeURIComponent("Founder and CEO "); // Encode spaces
+          const roleName = encodeURIComponent("Founder and CEO"); // Encode spaces
           fetch(`${API_BASE_URL}/api/roles/role/${roleName}`,{
             method: "GET",
             headers: {

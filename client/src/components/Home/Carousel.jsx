@@ -11,32 +11,37 @@ import carousel3 from "../../assets/carousel3.png";
 import carousel4 from "../../assets/carousel4.png";
 import carousel5 from "../../assets/carousel5.png";
 import carousel6 from "../../assets/carousel6.png";
+import gle from "../../assets/gle.jpeg"
+import sjc from "../../assets/sjc.jpeg"
+import yps from "../../assets/yps.JPG"
+import caa from "../../assets/caa.jpg"
+import sf from "../../assets/sf.jpeg"
 
 const Carousel = () => {
   const slides = [
     {
-      image: carousel1,
-      text: "MOBILIZING AND EQUIPPING YOUNG PEOPLE TO ENGAGE IN POLICY MAKING AND DEVELOPMENT PROCESSES",
+      image: gle,
+      text: "GIRLS LEADERSHIP AND EMPOWERMENT",
       url: "programs/women-in-climate-resilience"
     },
     {
-      image: carousel2,
-      text: "Promoting women’s empowerment and leadership in climate resilience and peacebuilding",
+      image: sjc,
+      text: "SKILLS DEVELPEMENT & JOB CREATION",
       url: "programs/youth-leadership"
     },
     {
-      image: carousel3,
-      text: "Partnering with local stakeholders to address climate-induced challenges in agriculture, energy and water resources",
+      image: yps,
+      text: "YOUTH, PEACE AND SECURITY",
       url: "programs/local-conference"
     },
     {
-      image: carousel4,
-      text: "Supporting skill development for youth and women to enhance their impact and sustainability",
+      image: caa,
+      text: "CLIMATE ACTION AND ADVOCACY",
       url: "programs/affoerestation-projects"
     },
     {
-      image: carousel5,
-      text: "Building capacity through leadership training, mentorship and advocacy programs.",
+      image: sf,
+      text: "SUSTAINABLE FARMING",
       url: "programs/youth-consultation"
     },
     {

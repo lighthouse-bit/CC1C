@@ -1,23 +1,17 @@
 import React from "react";
-import adw1 from "../../assets/adw1.png";
-import adw2 from "../../assets/adw2.png";
-import adw3 from "../../assets/adw3.png";
+import sjc from "../../assets/sjc.jpeg"
 
 const ClimateResilience = () => {
     return (
       <div className="mt-12 max-w-6xl mx-auto px-4 pb-20">
         {/* Section Title */}
         <h2 className="text-xl font-bold text-blue-900 uppercase">
-          Advancing Women and Girls in Climate Resilience
+          SKILLS DEVELPEMENT & JOB CREATION
         </h2>
         <hr className="my-2 border-gray-300" />
   
         {/* Image Grid */}
-        <div className="grid grid-cols-3 gap-4 mt-6">
-          <img src={adw1} alt="Woman at screen" className="w-full h-auto rounded-lg" />
-          <img src={adw2} alt="Woman in safety gear" className="w-full h-auto rounded-lg" />
-          <img src={adw3} alt="Woman working on pipes" className="w-full h-auto rounded-lg" />
-        </div>
+        <img src={sjc} alt="Team working together"  className="w-full h-[500px] rounded-lg mt-6"/>
   
         {/* Description */}
         <div className="text-gray-700 mt-6 leading-relaxed space-y-6">

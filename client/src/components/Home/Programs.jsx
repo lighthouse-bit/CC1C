@@ -1,12 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import pro1 from "../../assets/pro1.png";
-import pro2 from "../../assets/pro2.png";
-import pro3 from "../../assets/pro3.png";
 import gle from "../../assets/gle.jpeg"
 import sjc from "../../assets/sjc.jpeg"
 import yps from "../../assets/yps.JPG"
@@ -18,31 +16,31 @@ const programs = [
     date: "20th January 2025",
     title: "Girls leadership and empowerment",
     image: gle, 
-    url: "programs/women-in-climate-resilience"
+    url: "programs/girls-leadership"
   },
   {
     date: "11th October 2024",
     title: "Skills developement & job creation",
     image: sjc,
-    url: "programs/youth-leadership"
+    url: "programs/skills-development"
   },
   {
     date: "14th February 2023",
     title: "Youth, peace and security",
     image: yps,
-    url: "programs/local-conference"
+    url: "programs/youth-peace-security"
   },
   {
     date: "14th February 2023",
     title: "Climate action and advocacy",
     image: caa,
-    url: "programs/affoerestation-projects"
+    url: "programs/climate-action"
   },
   {
     date: "14th February 2023",
     title: "Sustainable Farming",
     image: sf,
-    url: "programs/youth-consultation"
+    url: "programs/sustainable-farming"
   },
   
 ];
@@ -76,7 +74,8 @@ const Programs = () => {
                 <div className="p-4 text-center space-y-2">
                   <p className="text-gray-600">{program.date}</p>
                   <h3 className="font-semibold text-lg text-[#052F6B]">{program.title}</h3>
-                  <button className="mt-3 text-[#052F6B80] font-semibold">Learn More</button>
+                  
+                  <Link to={program.url}><button className="mt-3 text-[#052F6B80] font-semibold">Learn More</button></Link>
                 </div>
               </div>
             </SwiperSlide>

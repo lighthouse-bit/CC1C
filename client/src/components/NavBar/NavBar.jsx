@@ -88,7 +88,7 @@ const NavBar = () => {
                   <Link to="about-us/objectives">Objectives</Link>
                 </li>
                 <li className="hover:bg-gray-100 px-4 py-2">
-                  <Link to="">Partnership & Sponsors</Link>
+                  <Link to="about-us/partners-sponsors">Partnership & Sponsors</Link>
                 </li>
               </ul>
             )}
@@ -110,25 +110,19 @@ const NavBar = () => {
             {programsDropdown && (
               <ul className="absolute left-0 mt-2 w-48 bg-white shadow-lg rounded-md text-gray-700 z-50">
                 <li className="hover:bg-gray-100 px-4 py-2">
-                  <Link to="programs/women-in-climate-resilience">Women in Climate Resilience</Link>
+                  <Link to="programs/girls-leadership">Girls leadership and empowerment</Link>
                 </li>
                 <li className="hover:bg-gray-100 px-4 py-2">
-                  <Link to="programs/youth-leadership">Youth Leadership in Climate Action</Link>
+                  <Link to="programs/skills-development">Skills developement & job creation</Link>
                 </li>
                 <li className="hover:bg-gray-100 px-4 py-2">
-                  <Link to="programs/local-conference">Local Conference of Youth(LCOY)</Link>
+                  <Link to="programs/youth-peace-security">Youth, peace and security</Link>
                 </li>
                 <li className="hover:bg-gray-100 px-4 py-2">
-                  <Link to="programs/youth-consultation">Youth Virtual Consultations</Link>
+                  <Link to="programs/climate-action">Climate action and advocacy</Link>
                 </li>
                 <li className="hover:bg-gray-100 px-4 py-2">
-                  <Link to="programs/affoerestation-projects">Afforestation projects in Zambia</Link>
-                </li>
-                <li className="hover:bg-gray-100 px-4 py-2">
-                  <Link to="programs/hygiene-programs">Hygiene management Program</Link>
-                </li>
-                <li className="hover:bg-gray-100 px-4 py-2">
-                  <Link to="programs/leadership-program">Leadership Program in York Village</Link>
+                  <Link to="programs/sustainable-farming">Sustainable Farming</Link>
                 </li>
               </ul>
             )}

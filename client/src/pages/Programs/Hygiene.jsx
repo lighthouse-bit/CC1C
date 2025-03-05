@@ -2,22 +2,19 @@ import React from "react";
 import hygiene1 from "../../assets/hygiene1.png";
 import hygiene2 from "../../assets/hygiene2.png";
 import hygiene3 from "../../assets/hygiene3.png";
+import yps from "../../assets/yps.JPG"
 
 const Hygiene = () => {
     return (
       <div className="mt-12 max-w-6xl mx-auto px-4 pb-20">
         {/* Section Title */}
         <h2 className="text-xl font-bold text-blue-900 uppercase">
-             HYGIENE MANAGEMENT PROGRAM
+          YOUTH, PEACE AND SECURITY
         </h2>
         <hr className="my-2 border-gray-300" />
   
         {/* Image Grid */}
-        <div className="grid grid-cols-3 gap-4 mt-6">
-          <img src={hygiene1} alt="Woman at screen" className="w-full h-auto rounded-lg" />
-          <img src={hygiene2} alt="Woman in safety gear" className="w-full h-auto rounded-lg" />
-          <img src={hygiene3} alt="Woman working on pipes" className="w-full h-auto rounded-lg" />
-        </div>
+        <img src={yps} alt="Team working together"  className="w-full h-[500px] rounded-lg mt-6"/>
   
         {/* Description */}
         <div className="text-gray-700 mt-6 leading-relaxed space-y-6">

@@ -1,13 +1,12 @@
-import React from "react";
-import partner from "../../assets/partner.png";
-import partner1 from "../../assets/partner1.jpg";
+import React from 'react'
+import partner1 from "../../assets/partner1.jpg"
 import partner2 from "../../assets/partner2.JPG";
 import partner3 from "../../assets/partner3.PNG";
 import partner4 from "../../assets/partner4.jpg";
 
 const partners = [partner1, partner2, partner3, partner4];
 
-const PartnersSection = () => {
+const PartCollab = () => {
   return (
     <div className="bg-gray-100 py-12">
       <h2 className="text-2xl font-bold text-blue-900 text-center mb-8">
@@ -18,7 +17,7 @@ const PartnersSection = () => {
       <div className="grid grid-cols-2 sm:grid-cols-3 md:hidden gap-6 justify-items-center px-4">
         {partners.map((logo, index) => (
           <div key={index} className="w-28 sm:w-32">
-            <img src={logo} alt="Partner Logo" className="w-full h-auto rounded-lg shadow-md" />
+            <img src={logo} alt="Partner Logo" className="w-full h-[200px] rounded-lg shadow-md" />
           </div>
         ))}
       </div>
@@ -34,7 +33,7 @@ const PartnersSection = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default PartnersSection;
+export default PartCollab

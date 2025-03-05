@@ -21,6 +21,7 @@ import ContactUs from "./pages/ContactForm/ContactUs";
 import MakeDonation from "./pages/Donations/MakeDonation";
 import AdminPanel from "./pages/admin-view/AdminPanel";
 import Gallery from "./pages/Gallery/Gallery";
+import PartCollab from "./pages/Partners/PartCollab";
 
 function App() {
   const location = useLocation(); // Get the current route
@@ -42,18 +43,20 @@ function App() {
         <Route path="about-us/our-team" element={<MeetOurTeam />} />
         <Route path="/about-us/our-team/:id" element={<TeamMemberDetail />} />
         <Route path="about-us/objectives" element={<ObjectivesSection />} />
+        <Route path="about-us/partners-sponsors" element={<PartCollab />} />
         <Route path="/programs" element={<ProgramsSection />} />
-        <Route path="programs/women-in-climate-resilience" element={<ClimateResilience />} />
+        <Route path="programs/skills-development" element={<ClimateResilience />} />
         <Route path="programs/youth-leadership" element={<YouthLeader />} />
         <Route path="programs/local-conference" element={<LocalConference />} />
-        <Route path="programs/youth-consultation" element={<YouthConsultant />} />
-        <Route path="programs/affoerestation-projects" element={<Afforestation />} />
-        <Route path="programs/hygiene-programs" element={<Hygiene />} />
-        <Route path="programs/leadership-program" element={<Leadership />} />
+        <Route path="programs/sustainable-farming" element={<YouthConsultant />} />
+        <Route path="programs/girls-leadership" element={<Afforestation />} />
+        <Route path="programs/youth-peace-security" element={<Hygiene />} />
+        <Route path="programs/climate-action" element={<Leadership />} />
         <Route path="/blog" element={<BlogSection />} />
         <Route path="more/contact-us" element={<ContactUs />} />
         <Route path="/donate" element={<MakeDonation />} />
         <Route path="/gallery" element={<Gallery />} />
+        
       </Routes>
 
       {!hideNavbarAndFooter && <Footer />}

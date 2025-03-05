@@ -1,11 +1,31 @@
 import React from "react";
-import partner from "../../assets/partner.png";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination } from "swiper/modules";
+
 import partner1 from "../../assets/partner1.jpg";
 import partner2 from "../../assets/partner2.JPG";
 import partner3 from "../../assets/partner3.PNG";
 import partner4 from "../../assets/partner4.jpg";
 
-const partners = [partner1, partner2, partner3, partner4];
+const partners = [
+  {
+      image: partner1, 
+      url: "programs/girls-leadership"
+    },
+    {
+      image: partner2,
+      url: "programs/skills-development"
+    },
+    {
+      image: partner3,
+      url: "programs/youth-peace-security"
+    },
+    {
+      image: partner4,
+      url: "programs/climate-action"
+    },
+    ];
+
 
 const PartnersSection = () => {
   return (
@@ -14,25 +34,31 @@ const PartnersSection = () => {
         OUR PARTNERS AND COLLABORATORS
       </h2>
 
-      {/* For Small Screens - Grid Layout */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:hidden gap-6 justify-items-center px-4">
-        {partners.map((logo, index) => (
-          <div key={index} className="w-28 sm:w-32">
-            <img src={logo} alt="Partner Logo" className="w-full h-auto rounded-lg shadow-md" />
-          </div>
-        ))}
-      </div>
-
-      {/* For Larger Screens - Auto Scrolling */}
-      <div className="hidden md:block overflow-hidden">
-        <div className="flex gap-6 justify-center animate-scroll">
-          {partners.map((logo, index) => (
-            <div key={index} className="flex-shrink-0 w-40">
-              <img src={logo} alt="Partner Logo" className="w-full h-auto rounded-lg shadow-md" />
+      <Swiper
+        modules={[Navigation, Pagination]}
+        spaceBetween={20}
+        slidesPerView={1}
+        loop={true}
+        navigation
+        pagination={{ clickable: true }}
+        breakpoints={{
+          640: { slidesPerView: 1 },
+          768: { slidesPerView: 2 },
+          1024: { slidesPerView: 3 },
+        }}
+        className="w-full"
+      >
+        {partners.map((partner, index) => (
+          <SwiperSlide key={index} className="flex justify-center px-4 pb-16 items-center">
+            <div className="bg-white rounded-lg shadow-lg h-[200px] w-[200px] flex justify-center items-center">
+              <img src={partner.image}  className="w-[200] h-[200] object-cover" />
             </div>
-          ))}
-        </div>
-      </div>
+          </SwiperSlide>
+
+        ))}
+
+      </Swiper>
+     
     </div>
   );
 };

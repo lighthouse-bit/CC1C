@@ -11,7 +11,7 @@ const Afforestation = () => {
         <hr className="my-2 border-gray-300" />
   
         {/* Image Grid */}
-        <img src={gle} alt="Team working together"  className="w-full h-[500px] rounded-lg mt-6"/>
+        <img src={gle} alt="Team working together"  className="w-full max-w-full h-auto rounded-lg mt-6 object-cover"/>
   
         {/* Description */}
         <div className="text-gray-700 mt-6 leading-relaxed space-y-6">

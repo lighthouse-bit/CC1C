@@ -7,22 +7,42 @@ import "swiper/css/pagination";
 import pro1 from "../../assets/pro1.png";
 import pro2 from "../../assets/pro2.png";
 import pro3 from "../../assets/pro3.png";
+import gle from "../../assets/gle.jpeg"
+import sjc from "../../assets/sjc.jpeg"
+import yps from "../../assets/yps.JPG"
+import caa from "../../assets/caa.jpg"
+import sf from "../../assets/sf.jpeg"
 
 const programs = [
   {
     date: "20th January 2025",
-    title: "Advancing women and girls in climate resilience",
-    image: pro1, 
+    title: "Girls leadership and empowerment",
+    image: gle, 
+    url: "programs/women-in-climate-resilience"
   },
   {
     date: "11th October 2024",
-    title: "Youth leadership in climate action and peacebuilding",
-    image: pro2,
+    title: "Skills developement & job creation",
+    image: sjc,
+    url: "programs/youth-leadership"
   },
   {
     date: "14th February 2023",
-    title: "Local conference of youth (LCOY) in Freetown",
-    image: pro3,
+    title: "Youth, peace and security",
+    image: yps,
+    url: "programs/local-conference"
+  },
+  {
+    date: "14th February 2023",
+    title: "Climate action and advocacy",
+    image: caa,
+    url: "programs/affoerestation-projects"
+  },
+  {
+    date: "14th February 2023",
+    title: "Sustainable Farming",
+    image: sf,
+    url: "programs/youth-consultation"
   },
   
 ];

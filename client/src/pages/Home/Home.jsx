@@ -74,18 +74,24 @@ const Home = () => {
                     MESSAGE FROM THE FOUNDER
                     </h2>
                     <p className="mt-3 leading-relaxed">
-                    Lorem ipsum dolor sit amet consectetur. Ultricies felis nibh cras dui
-                    venenatis vitae enim mattis amet. Sed lectus interdum lectus tellus
-                    quam viverra. Leo sed massa non varius a egestas pellentesque. Mi sit
-                    ut risus bibendum urna purus curabitur sapien. Nibh tincidunt sed sed
-                    tortor euismod ultricies vitae orci gravida.daf awd dasf dafafaf
+                    At the Center for Community Impact and Sustainability (CCIS), we are driven by the belief that real change happens when communities are empowered at the grassroots level to lead their own transformation.
+                    </p>
+                    <p className="mt-3 leading-relaxed">
+                    Through our work, we amplify the voices of youth in decision-making and equipping them with the skills and resources to thrive.
+                    </p>
+                    <p className="mt-3 leading-relaxed">
+                    CCIS is more than an organization; it is a dynamic platform of passionate  young leaders, dedicated partners, and resilient communities working together to create lasting impact. 
+                    </p>
+                    <p className="mt-3 leading-relaxed">
+                    Our work is deeply rooted in purpose. It’s about the young girl who finally gets access to education, the youth developing innovative projects to tackle climate change, and the community that rebuilds stronger after conflict or disaster. We are not waiting for the future to happen—we are shaping it, together.
                     </p>
                     <p className="mt-4 leading-relaxed">
-                    Augue ac feugiat volutpat a lorem elit id dolor. Elit duis egestas
-                    eros odio libero sit. Dignissim viverra at magna sed sapien urna
-                    adipiscing nisl. Enim et et enim nibh ut placerat. Eget elit in quam
-                    dignissim amet. Gravida et augue ut risus adipiscing orcddfi viverra
-                    posuere.
+                    To every partner, supporter, and chagemaker—thank you for walking this journey with us. 
+                    Your collaboration and commitment strengthen our efforts, and together, we are shaping a future that is sustainable and filled with possibilities, by the grace of God Almighty.
+                    </p>
+                    <p className="mt-3 leading-relaxed">
+                    Let’s transform, innovate, and build the future we deserve.
+
                     </p>
                 </div>
             </div></div>

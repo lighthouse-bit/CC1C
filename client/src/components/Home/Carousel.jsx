@@ -5,12 +5,6 @@ import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import carousel1 from "../../assets/carousel1.png";
-import carousel2 from "../../assets/carousel2.png";
-import carousel3 from "../../assets/carousel3.png";
-import carousel4 from "../../assets/carousel4.png";
-import carousel5 from "../../assets/carousel5.png";
-import carousel6 from "../../assets/carousel6.png";
 import gle from "../../assets/gle.jpeg"
 import sjc from "../../assets/sjc.jpeg"
 import yps from "../../assets/yps.JPG"
@@ -43,11 +37,6 @@ const Carousel = () => {
       image: sf,
       text: "SUSTAINABLE FARMING",
       url: "programs/youth-consultation"
-    },
-    {
-      image: carousel6,
-      text: "Advocating for policies and initiatives that combat gender-based violence and discrimination.",
-      url: "programs/leadership-program"
     },
   ];
 

@@ -37,18 +37,8 @@ const Home = () => {
                     CENTER FOR COMMUNITY IMPACT AND SUSTAINABILITY
                 </h2>
                 <p className="text-gray-700 mt-4 leading-relaxed">
-                    The center for community impact and sustainability (CCIS) is a dynamic
-                    youth-led organization dedicated to empowering vulnerable communities
-                    through sustainable development initiatives. CCIS works to address
-                    pressing global challenges by advancing{" "}
-                    <span className="text-blue-600 font-semibold">
-                    youth participation, gender equality, climate action, and capacity
-                    building.
-                    </span>{" "}
-                    With operations spanning multiple countries including Sierra Leone, CCIS
-                    champions innovative solutions to ensure marginalized groups—particularly
-                    women, girls, and youth—are at the forefront of decision-making processes
-                    and sustainable development efforts.
+                The Centre for Community Impact and Sustainability (CCIS) is a dynamic youth-led organization dedicated to empowering communities through sustainable development initiatives. CCIS addresses pressing global challenges by fostering youth leadership, promoting inclusive growth, and driving impactful initiatives that create lasting change. Through innovative solutions and strategic engagement, CCIS ensures that marginalized communities are actively involved in decision-making and sustainable development efforts.
+
                 </p>
                 <button className="mt-6 bg-[#052F6B] text-white px-6 py-3 rounded-md text-lg font-semibold shadow-md hover:bg-blue-800 transition">
                     Learn more

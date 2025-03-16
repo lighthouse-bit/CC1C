@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import rounded from "../../assets/rounded.png";
 
 const Footer = () => {
@@ -10,13 +11,13 @@ const Footer = () => {
         <div>
           <h2 className="font-semibold text-lg">Company</h2>
           <ul className="mt-3 space-y-2">
-            <li>Home</li>
-            <li>About Us</li>
-            <li>Our Work</li>
-            <li>Blog</li>
-            <li>Gallery</li>
-            <li>Contact Us</li>
-            <li>Make A Donation</li>
+            <Link to='/'><li>Home</li></Link>
+            <Link to='/about-us'> <li>About Us</li></Link>
+            <Link to='/'> <li>Our Work</li></Link>
+            <Link to='/blog'><li>Blog</li></Link>
+            <Link to='/gallery'><li>Gallery</li></Link>
+            <Link to='more/contact-us'> <li>Contact Us</li></Link>
+            <Link to='/donate'><li>Make A Donation</li></Link>
           </ul>
         </div>
         
@@ -24,11 +25,11 @@ const Footer = () => {
         <div>
           <h2 className="font-semibold text-lg">Our Work</h2>
           <ul className="mt-3 space-y-2">
-            <li>Programs</li>
-            <li>Events</li>
-            <li>Impact</li>
-            <li>Success Stories</li>
-            <li>Gallery</li>
+            <Link to='/programs'><li>Programs</li></Link>
+            <Link to='/'><li>Events</li></Link>
+            <Link to='/'><li>Impact</li></Link>
+            <Link to='/'><li>Success Stories</li></Link>
+            <Link to='/gallery'><li>Gallery</li></Link>
           </ul>
         </div>
         
@@ -36,12 +37,12 @@ const Footer = () => {
         <div>
           <h2 className="font-semibold text-lg">About Us</h2>
           <ul className="mt-3 space-y-2">
-            <li>Our Story</li>
-            <li>Vision & Mission</li>
-            <li>Message From Founder</li>
-            <li>Our Team</li>
-            <li>Objectives</li>
-            <li>Partnerships & Sponsors</li>
+            <Link to='/'><li>Our Story</li></Link>
+            <Link to='/about-us/vision-mission'><li>Vision & Mission</li></Link>
+            <Link to='/about-us/founder-message'><li>Message From Founder</li></Link>
+            <Link to='/about-us/our-team'><li>Our Team</li></Link>
+            <Link to='/about-us/objectives'><li>Objectives</li></Link>
+            <Link to='/about-us/partners-sponsors'><li>Partnerships & Sponsors</li></Link>
           </ul>
         </div>
 

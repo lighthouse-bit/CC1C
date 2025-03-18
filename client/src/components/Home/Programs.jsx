@@ -5,41 +5,41 @@ import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import gle from "../../assets/gle.jpeg"
-import sjc from "../../assets/sjc.jpeg"
-import yps from "../../assets/yps.JPG"
-import caa from "../../assets/caa.jpg"
-import sf from "../../assets/sf.jpeg"
+import gl from "../../assets/gl.jpg"
+import sd from "../../assets/sd.jpg"
+import ps from "../../assets/ps.jpg"
+import ca from "../../assets/ca.jpg"
+import sff from "../../assets/sf.jpg"
 
 const programs = [
   {
     date: "20th January 2025",
     title: "Girls leadership and empowerment",
-    image: gle, 
+    image: gl, 
     url: "programs/girls-leadership"
   },
   {
     date: "11th October 2024",
     title: "Skills developement & job creation",
-    image: sjc,
+    image: sd,
     url: "programs/skills-development"
   },
   {
     date: "14th February 2023",
     title: "Youth, peace and security",
-    image: yps,
+    image: ps,
     url: "programs/youth-peace-security"
   },
   {
     date: "14th February 2023",
     title: "Climate action and advocacy",
-    image: caa,
+    image: ca,
     url: "programs/climate-action"
   },
   {
     date: "14th February 2023",
     title: "Sustainable Farming",
-    image: sf,
+    image: sff,
     url: "programs/sustainable-farming"
   },
   

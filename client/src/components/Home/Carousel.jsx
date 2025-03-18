@@ -5,12 +5,10 @@ import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import gle from "../../assets/gle.jpeg"
 import gl from "../../assets/gl.jpg"
-import sjc from "../../assets/sjc.jpeg"
-import yps from "../../assets/yps.JPG"
+import sd from "../../assets/sd.jpg"
+import ps from "../../assets/ps.jpg"
 import ca from "../../assets/ca.jpg"
-import sf from "../../assets/sf.jpeg"
 import sff from "../../assets/sf.jpg"
 
 const Carousel = () => {
@@ -21,12 +19,12 @@ const Carousel = () => {
       url: "programs/women-in-climate-resilience"
     },
     {
-      image: sjc,
+      image: sd,
       text: "SKILLS DEVELPEMENT & JOB CREATION",
       url: "programs/youth-leadership"
     },
     {
-      image: yps,
+      image: ps,
       text: "YOUTH, PEACE AND SECURITY",
       url: "programs/local-conference"
     },

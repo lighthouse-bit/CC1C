@@ -22,6 +22,9 @@ import MakeDonation from "./pages/Donations/MakeDonation";
 import AdminPanel from "./pages/admin-view/AdminPanel";
 import Gallery from "./pages/Gallery/Gallery";
 import PartCollab from "./pages/Partners/PartCollab";
+import DonationForm from "./components/Donate/DonationForm";
+import AdvisoryBoard from "./components/NavBar/AboutUs/AdvisoryBoard";
+
 
 function App() {
   const location = useLocation(); // Get the current route
@@ -56,6 +59,8 @@ function App() {
         <Route path="more/contact-us" element={<ContactUs />} />
         <Route path="/donate" element={<MakeDonation />} />
         <Route path="/gallery" element={<Gallery />} />
+        <Route path="/transfer-page" element={<DonationForm />} />
+        <Route path="about-us/advisory-board" element={<AdvisoryBoard />} />
         
       </Routes>
 

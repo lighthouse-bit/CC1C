@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import Carousel from '../../components/Home/Carousel'
-// import founder from '../../assets/founder.png'
+import founder3 from '../../assets/founder3.jpg'
 import donate from '../../assets/donate.png'
 import Programs from '../../components/Home/Programs'
 import VisionMision from '../../components/Home/VisionMision'
 import ContactForm from '../../components/Home/ContactForm'
 import PartnersSection from '../../components/Home/PartnersSection'
+import Gallery from '@/components/Home/Gallery'
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
@@ -50,7 +51,7 @@ const Home = () => {
                 {/* Image Section */}
                 <div className="md:w-1/3 flex flex-col items-center text-center">
                     <img
-                    src={`${API_BASE_URL}${founder.image_path}`} 
+                    src={founder3} 
                     alt="Founder"
                     className="w-40 h-40 rounded-full object-cover border-4 border-white shadow-md"
                     />
@@ -111,6 +112,7 @@ const Home = () => {
             <Programs />
             <VisionMision/>
             <PartnersSection/>
+            <Gallery/>
             <ContactForm />
 
         </div>    

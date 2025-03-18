@@ -11,13 +11,8 @@ const Gallery = () => {
   const [images, setImages] = useState([]);
 
   useEffect(() => {
-    fetch(`${API_BASE_URL}/api/gallery`,{
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      mode: "cors", // Ensures CORS handling
-    }) 
+    fetch(`${API_BASE_URL}/api/gallery`
+    ) 
       .then((response) => response.json())
       .then((data) => setImages(data))
       .catch((error) => console.error("Error fetching gallery images:", error));

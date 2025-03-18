@@ -1,8 +1,7 @@
 import React from "react";
-import nys1 from "../../assets/nys1.png";
-import nys2 from "../../assets/nys2.png";
-import nys3 from "../../assets/nys3.png";
+
 import sf from "../../assets/sf.jpeg"
+import sff from "../../assets/sf.jpg"
 
 const YouthConsultant = () => {
     return (
@@ -14,7 +13,7 @@ const YouthConsultant = () => {
         <hr className="my-2 border-gray-300" />
   
         {/* Image Grid */}
-        <img src={sf} alt="Team working together"  className="w-full max-w-full h-auto rounded-lg mt-6 object-cover"/>
+        <img src={sff} alt="Team working together"  className="w-full max-w-full h-auto rounded-lg mt-6 object-cover"/>
   
         {/* Description */}
         <div className="text-gray-700 mt-6 leading-relaxed space-y-6">

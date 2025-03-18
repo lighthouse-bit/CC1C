@@ -4,7 +4,6 @@ import { Navigation, Pagination } from "swiper/modules";
 
 import partner1 from "../../assets/partner1.jpg";
 import partner2 from "../../assets/partner2.JPG";
-import partner3 from "../../assets/partner3.PNG";
 import partner4 from "../../assets/partner4.jpg";
 
 const partners = [
@@ -16,10 +15,7 @@ const partners = [
       image: partner2,
       url: "programs/skills-development"
     },
-    {
-      image: partner3,
-      url: "programs/youth-peace-security"
-    },
+    
     {
       image: partner4,
       url: "programs/climate-action"

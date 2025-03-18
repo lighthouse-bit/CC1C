@@ -3,28 +3,29 @@ import { Link } from "react-router-dom"; // Import Link for navigation
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
-const MeetOurTeam = () => {
+const AdvisoryBoard = () => {
   const [teamMembers, setTeamMembers] = useState([]);
 
   useEffect(() => {
     
-    fetch(`${API_BASE_URL}/api/roles`) 
-      .then((response) => response.json())
-      .then((data) => {
-        // Filter out the role with name "advisory board"
-        const filteredRoles = data.filter(
-          (role) => role.role_name && role.role_name.toLowerCase() !== "advisory board"
-        );
-        console.log("Filtered roles:", filteredRoles);
-        setTeamMembers(filteredRoles);
-      })
-      .catch((error) => console.error("Error fetching team members:", error));
+    fetch(`${API_BASE_URL}/api/roles`)
+  .then((response) => response.json())
+  .then((data) => {
+    console.log("Fetched roles:", data); 
+
+    const advisoryBoardRoles = data.filter(
+      (role) => role.role_name && role.role_name.toLowerCase().trim() === "advisory board"
+    );
+
+    setTeamMembers(advisoryBoardRoles);
+  })
+  .catch((error) => console.error("Error fetching roles:", error));
   }, []);
 
   return (
     <section className="max-w-6xl mx-auto py-12 px-4">
       <h2 className="text-2xl font-bold text-blue-900 text-center uppercase border-b pb-2">
-        MEET OUR TEAM
+        ADVISORY BOARD
       </h2>
 
       {/* Team Grid */}
@@ -62,4 +63,4 @@ const MeetOurTeam = () => {
   );
 };
 
-export default MeetOurTeam;
+export default AdvisoryBoard;

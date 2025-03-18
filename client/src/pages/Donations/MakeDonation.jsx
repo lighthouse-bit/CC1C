@@ -1,5 +1,6 @@
 import React from "react";
 import donate1 from "../../assets/donate1.png";
+import { Link } from "react-router-dom";
 
 const MakeDonation = () => {
   return (
@@ -22,22 +23,23 @@ const MakeDonation = () => {
 
       {/* Description Content */}
       <div className="mt-6 text-gray-700 space-y-4">
+        <h4 className="text-lg font-bold text-900 mt-4">Donate Now and Empower Lasting Change</h4>
         <p>
-          Lorem ipsum dolor sit amet consectetur. Ultricies felis nibh cras dui venenatis vitae enim mattis amet. Sed lectus interdum lectus tellus quam viverra. Leo sed massa non varius a egestas pellentesque. Mi sit ut risus bibendum urna purus curabitur sapien. Nibh tincidunt sed sed tortor euismod ultricies vitae orci gravida.
+        Help us amplify youth voices, equip young leaders, and transform communities. Your support will:
+
+        - Provide education and resources to marginalized youth
+        - Foster innovative climate solutions
+        - Rebuild resilient communities
         </p>
-        <p>
-          Augue ac feugiat volutpat a lorem elit id dolor. Elit dui egestas eros odio libero sit. Dignissim viverra at magna sed sapien urna adipiscing nisl. Enim et et enim nibh ut placerat. Eget elit in quam dignissim amet. Gravida et augue ut risus adipiscing orci viverra posuere. Sodales nisl aliquet mauris pellentesque sed.
-        </p>
-        <p>
-          In iaculis mattis lacus enim nunc sed tortor habitasse magnis. Ut facilisis egestas amet faucibus sem faucibus sed morbi lectus.
-        </p>
+        <h4 className="text-lg font-bold text-900 mt-4">Every gift counts. Donate now and join us in shaping a sustainable future!</h4>
       </div>
 
       {/* Donate Button */}
       <div className="mt-6">
+        <Link to='/transfer-page'>
         <button className="bg-black text-white py-3 px-6 rounded-md hover:bg-gray-800 transition">
           Donate Now
-        </button>
+        </button></Link>
       </div>
     </div>
   );

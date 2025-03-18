@@ -49,8 +49,8 @@ const Footer = () => {
         {/* Contact Section */}
         <div className="text-center md:text-left">
             <img src={rounded} alt="" className="w-24 md:w-32 mx-auto md:mx-0 mb-4" />
-          <p>Phone: (+232) 346-122-95</p>
-          <p>(+1) 301-245-7892</p>
+          <p>Phone: (+232) 73418867</p>
+          <p>(+232) 31550385</p>
           <p>Email: info@ccisimpact.org</p>
           <p>Instagram: CCIS_Sustainability</p>
         </div>

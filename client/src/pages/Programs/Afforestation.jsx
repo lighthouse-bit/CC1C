@@ -1,5 +1,4 @@
 import React from "react";
-import gle from "../../assets/gle.jpeg"
 import gl from "../../assets/gl.jpg"
 
 const Afforestation = () => {

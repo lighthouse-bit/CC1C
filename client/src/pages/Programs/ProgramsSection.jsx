@@ -1,10 +1,10 @@
 import React from "react";
 
-import gle from "../../assets/gle.jpeg"
+import gl from "../../assets/gl.jpg"
 import sjc from "../../assets/sjc.jpeg"
 import yps from "../../assets/yps.JPG"
-import caa from "../../assets/caa.jpg"
-import sf from "../../assets/sf.jpeg"
+import ca from "../../assets/ca.jpg"
+import sff from "../../assets/sf.jpg"
 
 
 
@@ -21,7 +21,7 @@ const ProgramsSection = () => {
         </h3>
   
         {/* Image Grid */}
-        <img src={gle} alt="Team working together"  className="w-full h-[500px] rounded-lg mt-6"/>
+        <img src={gl} alt="Team working together"  className="w-full h-[500px] rounded-lg mt-6"/>
         {/* Description */}
         <p className="text-gray-700 mt-6 leading-relaxed">
         We believe in the power of girls to drive change in society. Our Girls’ Leadership and Empowerment Program provides mentorship, skills training, and leadership development opportunities to equip young girls with the confidence and knowledge they need to thrive. We create safe spaces for adolescent girls to express themselves, access education, and develop essential life skills. Through workshops, advocacy, and mentorship, we are nurturing the next generation of female leaders who will challenge gender inequalities and break barriers in their communities.
@@ -73,7 +73,7 @@ const ProgramsSection = () => {
         </h3>
   
         {/* Image Grid */}
-        <img src={caa} alt="Team working together"  className="w-full h-[500px] rounded-lg mt-6"/>
+        <img src={ca} alt="Team working together"  className="w-full h-[500px] rounded-lg mt-6"/>
   
         {/* Description */}
         <p className="text-gray-700 mt-6 leading-relaxed">
@@ -91,7 +91,7 @@ const ProgramsSection = () => {
         </h3>
   
         {/* Image Grid */}
-        <img src={sf} alt="Team working together"  className="w-full h-[500px] rounded-lg mt-6"/>
+        <img src={sff} alt="Team working together"  className="w-full h-[500px] rounded-lg mt-6"/>
   
         {/* Description */}
         <p className="text-gray-700 mt-6 leading-relaxed">

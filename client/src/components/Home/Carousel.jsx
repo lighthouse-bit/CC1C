@@ -9,7 +9,7 @@ import gle from "../../assets/gle.jpeg"
 import gl from "../../assets/gl.jpg"
 import sjc from "../../assets/sjc.jpeg"
 import yps from "../../assets/yps.JPG"
-import caa from "../../assets/caa.jpg"
+import ca from "../../assets/ca.jpg"
 import sf from "../../assets/sf.jpeg"
 import sff from "../../assets/sf.jpg"
 
@@ -31,7 +31,7 @@ const Carousel = () => {
       url: "programs/local-conference"
     },
     {
-      image: caa,
+      image: ca,
       text: "CLIMATE ACTION AND ADVOCACY",
       url: "programs/affoerestation-projects"
     },

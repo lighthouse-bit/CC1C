@@ -6,15 +6,17 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import gle from "../../assets/gle.jpeg"
+import gl from "../../assets/gl.jpg"
 import sjc from "../../assets/sjc.jpeg"
 import yps from "../../assets/yps.JPG"
 import caa from "../../assets/caa.jpg"
 import sf from "../../assets/sf.jpeg"
+import sff from "../../assets/sf.jpg"
 
 const Carousel = () => {
   const slides = [
     {
-      image: gle,
+      image: gl,
       text: "GIRLS LEADERSHIP AND EMPOWERMENT",
       url: "programs/women-in-climate-resilience"
     },
@@ -34,7 +36,7 @@ const Carousel = () => {
       url: "programs/affoerestation-projects"
     },
     {
-      image: sf,
+      image: sff,
       text: "SUSTAINABLE FARMING",
       url: "programs/youth-consultation"
     },

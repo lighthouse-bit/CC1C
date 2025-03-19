@@ -3,20 +3,35 @@ import { Link } from "react-router-dom"; // Import Link for navigation
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
+const roleHierarchy = {
+  "Founder and CEO": 1,
+  "Chief Impact Officer (CIO)": 2,
+  "Head of Strategic Partnerships": 3,
+  "Programs Manager": 4,
+  "Grants and Development Manager": 5,
+  "Communications Lead Officer": 6,
+};
+
 const MeetOurTeam = () => {
   const [teamMembers, setTeamMembers] = useState([]);
 
   useEffect(() => {
-    
-    fetch(`${API_BASE_URL}/api/roles`) 
+    fetch(`${API_BASE_URL}/api/roles`)
       .then((response) => response.json())
       .then((data) => {
-        // Filter out the role with name "advisory board"
+        // Filter out "Advisory Board"
         const filteredRoles = data.filter(
           (role) => role.role_name && role.role_name.toLowerCase() !== "advisory board"
         );
-        
-        setTeamMembers(filteredRoles);
+
+        // Sort roles based on hierarchy, others follow in default order
+        const sortedRoles = filteredRoles.sort((a, b) => {
+          const rankA = roleHierarchy[a.role_name] || 999; // Default to 999 if not in hierarchy
+          const rankB = roleHierarchy[b.role_name] || 999;
+          return rankA - rankB;
+        });
+
+        setTeamMembers(sortedRoles);
       })
       .catch((error) => console.error("Error fetching team members:", error));
   }, []);

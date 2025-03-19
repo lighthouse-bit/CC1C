@@ -1,10 +1,9 @@
 import React from 'react'
 import partner1 from "../../assets/partner1.jpg"
 import partner2 from "../../assets/partner2.JPG";
-import partner3 from "../../assets/partner3.PNG";
 import partner4 from "../../assets/partner4.jpg";
 
-const partners = [partner1, partner2, partner3, partner4];
+const partners = [partner1, partner2, partner4];
 
 const PartCollab = () => {
   return (

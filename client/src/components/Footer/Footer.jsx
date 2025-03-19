@@ -53,6 +53,7 @@ const Footer = () => {
           <p>(+232) 31550385</p>
           <p>Email: info@ccisimpact.org</p>
           <p>Instagram: CCIS_Sustainability</p>
+          <p>Address: 33 Macdonald street, Freetown, Sierra Leone.</p>
         </div>
       </div>
       

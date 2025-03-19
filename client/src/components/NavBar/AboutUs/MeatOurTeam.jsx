@@ -15,7 +15,7 @@ const MeetOurTeam = () => {
         const filteredRoles = data.filter(
           (role) => role.role_name && role.role_name.toLowerCase() !== "advisory board"
         );
-        console.log("Filtered roles:", filteredRoles);
+        
         setTeamMembers(filteredRoles);
       })
       .catch((error) => console.error("Error fetching team members:", error));

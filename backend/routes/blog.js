@@ -6,7 +6,7 @@ const router = express.Router();
 // Get all blog posts
 router.get("/", async (req, res) => {
   try {
-    console.log("Fetching all blog posts...");
+    
     const { data, error } = await supabase.from("blogs").select("*");
     if (error) throw error;
 
@@ -21,7 +21,7 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   const { id } = req.params;
   try {
-    console.log(`Fetching blog post with ID: ${id}`);
+    // console.log(`Fetching blog post with ID: ${id}`);
     const { data, error } = await supabase.from("blogs").select("*").eq("id", id).single();
     if (error) throw error;
 
@@ -42,7 +42,7 @@ router.post("/", async (req, res) => {
   }
 
   try {
-    console.log("Creating new blog post:", req.body);
+    // console.log("Creating new blog post:", req.body);
     const { data, error } = await supabase.from("blogs").insert([{ title, content, image, author }]);
     if (error) throw error;
 
@@ -64,7 +64,7 @@ router.put("/:id", async (req, res) => {
   }
 
   try {
-    console.log(`Updating blog post with ID: ${id}`);
+    // console.log(`Updating blog post with ID: ${id}`);
     const { data, error } = await supabase.from("blogs").update({ title, content, image, author }).eq("id", id);
     if (error) throw error;
 
@@ -79,7 +79,7 @@ router.put("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   const { id } = req.params;
   try {
-    console.log(`Deleting blog post with ID: ${id}`);
+    // console.log(`Deleting blog post with ID: ${id}`);
     const { error } = await supabase.from("blogs").delete().eq("id", id);
     if (error) throw error;
 

@@ -24,8 +24,7 @@ app.use("/api/blogs", blogRoutes);
 
 
 app.post("/api/contact", async (req, res) => {
-  console.log("✅ POST /api/contact hit"); // Debugging log
-
+ 
   const { name, email, message } = req.body;
 
   if (!name || !email || !message) {
@@ -51,13 +50,10 @@ app.post("/api/contact", async (req, res) => {
     await transporter.sendMail(mailOptions);
     res.json({ success: true, message: "Email sent successfully!" });
   } catch (error) {
-    console.error("❌ Error sending email:", error);
+    
     res.status(500).json({ error: "Failed to send email. Try again later." });
   }
 });
-
-// Debugging log to verify registered routes
-console.log("✅ Registered routes:", app._router.stack.map(r => r.route?.path).filter(Boolean));
 
 
 app.post("/api/contact", (req, res) => {
@@ -174,17 +170,11 @@ app.get("/api/gallery", async (req, res) => {
 
 
 
-
 app.use((err, req, res, next) => {
   console.error("Server error:", err);
   res.status(500).json({ error: "Internal server error" });
 });
 
-console.log("Registered routes:", app._router.stack.map(r => r.route?.path).filter(Boolean));
-
-
-console.log("📨 EMAIL_USER:", process.env.EMAIL_USER);
-console.log("📨 RECEIVER_EMAIL:", process.env.RECEIVER_EMAIL);
 
 
 // Start server

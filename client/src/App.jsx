@@ -25,6 +25,7 @@ import PartCollab from "./pages/Partners/PartCollab";
 import DonationForm from "./components/Donate/DonationForm";
 import AdvisoryBoard from "./components/NavBar/AboutUs/AdvisoryBoard";
 import AdminBlogForm from "./components/admin-view/AdminBlogForm";
+import BlogDetails from "./pages/Blog/BlogDetails";
 
 
 function App() {
@@ -63,6 +64,7 @@ function App() {
         <Route path="/transfer-page" element={<DonationForm />} />
         <Route path="about-us/advisory-board" element={<AdvisoryBoard />} />
         <Route path="/admin/blogs/new" element={<AdminBlogForm />} />
+        <Route path="/blog/:id" element={<BlogDetails />} />
         
       </Routes>
 

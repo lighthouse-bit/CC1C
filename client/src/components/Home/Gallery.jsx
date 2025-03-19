@@ -22,38 +22,41 @@ const Gallery = () => {
     <div className="bg-gray-200 py-10 px-5">
       <h2 className="text-center text-2xl font-bold mb-6">GALLERY</h2>
 
-      {/* Gallery Section */}
-      <div className="flex justify-center items-center space-x-3">
+      {/* Responsive Gallery */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 justify-center items-center">
         {images.length > 0 ? (
           <>
+            {/* Left Image */}
             {images[0] && (
               <img
                 src={`${API_BASE_URL}${images[0]?.image_path}`} 
                 alt="Gallery Left"
-                className="w-40 h-28 object-cover rounded-lg shadow-md"
+                className="w-full sm:w-40 h-28 object-cover rounded-lg shadow-md mx-auto"
               />
             )}
 
+            {/* Main Image with Button */}
             {images[1] && (
-              <div className="relative">
+              <div className="relative w-full sm:w-96 h-72 mx-auto">
                 <img
                   src={`${API_BASE_URL}${images[1]?.image_path}`} 
                   alt="Main Gallery"
-                  className="w-96 h-72 object-cover rounded-lg shadow-lg"
+                  className="w-full h-full object-cover rounded-lg shadow-lg"
                 />
                 <Link to="gallery">
-                  <button className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black text-white px-4 py-2 rounded-lg font-semibold">
+                  <button className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white px-4 py-2 rounded-lg font-semibold">
                     View Gallery
                   </button>
                 </Link>
               </div>
             )}
 
+            {/* Right Image */}
             {images[2] && (
               <img
                 src={`${API_BASE_URL}${images[2]?.image_path}`} 
                 alt="Gallery Right"
-                className="w-40 h-28 object-cover rounded-lg shadow-md"
+                className="w-full sm:w-40 h-28 object-cover rounded-lg shadow-md mx-auto"
               />
             )}
           </>

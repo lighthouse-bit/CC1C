@@ -21,9 +21,17 @@ const AdminBlogForm = () => {
 
   const fetchBlogs = async () => {
     try {
+    //   console.log("Fetching blogs from:", `${API_BASE_URL}/api/blogs`);
+
       const response = await fetch(`${API_BASE_URL}/api/blogs`);
       const data = await response.json();
-      if (response.ok) setPosts(data);
+
+
+      if (!data.success || !Array.isArray(data.blogs)) {
+        throw new Error("Invalid response format");
+      }
+
+      setPosts(data.blogs); // ✅ Fix: Extract blogs array
     } catch (err) {
       console.error("Error fetching blogs:", err);
     }
@@ -37,20 +45,20 @@ const AdminBlogForm = () => {
     e.preventDefault();
     setMessage("");
     setError("");
-  
+
     try {
       const response = await fetch(`${API_BASE_URL}/api/blogs`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
-  
+
       const text = await response.text(); // Get raw response before parsing
       console.log("Raw Response:", text); // Log response
-  
+
       const data = JSON.parse(text); // Manually parse JSON
       if (!response.ok) throw new Error(data.error || "Something went wrong");
-  
+
       setMessage("Blog post created successfully!");
       setFormData({ title: "", content: "", image: "", author: "", authorImage: "" });
       fetchBlogs();
@@ -58,7 +66,6 @@ const AdminBlogForm = () => {
       setError(err.message);
     }
   };
-  
 
   const handleDelete = async (id) => {
     try {

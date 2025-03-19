@@ -4,6 +4,7 @@ import supabase from "./Database/db.js";
 import path from "path";
 import multer from "multer";
 import dotenv from "dotenv";
+import nodemailer from "nodemailer"
 
 
 
@@ -179,6 +180,10 @@ app.use((err, req, res, next) => {
 });
 
 console.log("Registered routes:", app._router.stack.map(r => r.route?.path).filter(Boolean));
+
+
+console.log("📨 EMAIL_USER:", process.env.EMAIL_USER);
+console.log("📨 RECEIVER_EMAIL:", process.env.RECEIVER_EMAIL);
 
 
 // Start server

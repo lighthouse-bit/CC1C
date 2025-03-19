@@ -5,6 +5,10 @@ import path from "path";
 import multer from "multer";
 import dotenv from "dotenv";
 
+
+
+
+
 dotenv.config();
 
 const app = express();
@@ -14,6 +18,54 @@ app.use(cors());
 
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+
+app.post("/api/contact", async (req, res) => {
+  console.log("✅ POST /api/contact hit"); // Debugging log
+
+  const { name, email, message } = req.body;
+
+  if (!name || !email || !message) {
+    return res.status(400).json({ error: "All fields are required" });
+  }
+
+  try {
+    const transporter = nodemailer.createTransport({
+      service: process.env.EMAIL_SERVICE,
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: process.env.RECEIVER_EMAIL,
+      subject: `New Contact Form Message from ${name}`,
+      text: `From: ${email}\n\n${message}`,
+    };
+
+    await transporter.sendMail(mailOptions);
+    res.json({ success: true, message: "Email sent successfully!" });
+  } catch (error) {
+    console.error("❌ Error sending email:", error);
+    res.status(500).json({ error: "Failed to send email. Try again later." });
+  }
+});
+
+// Debugging log to verify registered routes
+console.log("✅ Registered routes:", app._router.stack.map(r => r.route?.path).filter(Boolean));
+
+
+app.post("/api/contact", (req, res) => {
+  console.log("Received data:", req.body);
+  res.json({ success: true, message: "Request received!" });
+});
+
+
+
+
 
 // Set up static folder to serve uploaded files
 import { fileURLToPath } from "url";
@@ -117,6 +169,17 @@ app.get("/api/gallery", async (req, res) => {
 
   res.json(data);
 });
+
+
+
+
+app.use((err, req, res, next) => {
+  console.error("Server error:", err);
+  res.status(500).json({ error: "Internal server error" });
+});
+
+console.log("Registered routes:", app._router.stack.map(r => r.route?.path).filter(Boolean));
+
 
 // Start server
 const PORT = process.env.PORT || 5000;

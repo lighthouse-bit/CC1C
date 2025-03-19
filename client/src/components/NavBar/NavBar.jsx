@@ -88,9 +88,6 @@ const NavBar = () => {
                   <Link to="about-us/advisory-board">Advisory Board</Link>
                 </li>
                 <li className="hover:bg-gray-100 px-4 py-2">
-                  <Link to="about-us/objectives">Objectives</Link>
-                </li>
-                <li className="hover:bg-gray-100 px-4 py-2">
                   <Link to="about-us/partners-sponsors">Partnership & Sponsors</Link>
                 </li>
               </ul>

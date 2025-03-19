@@ -5,7 +5,7 @@ import path from "path";
 import multer from "multer";
 import dotenv from "dotenv";
 import nodemailer from "nodemailer"
-
+import blogRoutes from "./routes/blog.js";
 
 
 
@@ -20,6 +20,7 @@ app.use(cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use("/api/blogs", blogRoutes);
 
 
 app.post("/api/contact", async (req, res) => {

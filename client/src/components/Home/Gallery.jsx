@@ -28,7 +28,7 @@ const Gallery = () => {
           <>
             {images[0] && (
               <img
-                src={`${API_BASE_URL}${images[0]?.image_path}`} // Updated to use image_path
+                src={`${API_BASE_URL}${images[0]?.image_path}`} 
                 alt="Gallery Left"
                 className="w-40 h-28 object-cover rounded-lg shadow-md"
               />
@@ -37,7 +37,7 @@ const Gallery = () => {
             {images[1] && (
               <div className="relative">
                 <img
-                  src={`${API_BASE_URL}${images[1]?.image_path}`} // Updated to use image_path
+                  src={`${API_BASE_URL}${images[1]?.image_path}`} 
                   alt="Main Gallery"
                   className="w-96 h-72 object-cover rounded-lg shadow-lg"
                 />
@@ -51,7 +51,7 @@ const Gallery = () => {
 
             {images[2] && (
               <img
-                src={`${API_BASE_URL}${images[2]?.image_path}`} // Updated to use image_path
+                src={`${API_BASE_URL}${images[2]?.image_path}`} 
                 alt="Gallery Right"
                 className="w-40 h-28 object-cover rounded-lg shadow-md"
               />

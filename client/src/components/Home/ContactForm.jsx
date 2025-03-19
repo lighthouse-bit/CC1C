@@ -16,17 +16,33 @@ const ContactForm = () => {
     e.preventDefault();
     setLoading(true);
     setResponseMessage("");
-    
+  
     try {
+      console.log("Sending request to:", `${API_BASE_URL}/api/contact`);
+      console.log("Request body:", JSON.stringify(formData));
+
       const response = await fetch(`${API_BASE_URL}/api/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
-      
-      const result = await response.json();
+  
+      const textResponse = await response.text(); 
+      console.log("Raw response:", textResponse); 
+
+
+  
+      let result;
+      try {
+        result = JSON.parse(textResponse); 
+      } catch (err) {
+        console.error("Error parsing JSON:", err);
+        setResponseMessage("Invalid server response.");
+        return;
+      }
+  
       if (response.ok) {
-        setResponseMessage("Message sent successfully!");
+        setResponseMessage(result.message || "Message sent successfully!");
         setFormData({ name: "", email: "", message: "" });
       } else {
         setResponseMessage(result.error || "Failed to send message.");
@@ -37,6 +53,7 @@ const ContactForm = () => {
     }
     setLoading(false);
   };
+  
 
   return (
     <div className="max-w-5xl mx-auto py-12 px-6">

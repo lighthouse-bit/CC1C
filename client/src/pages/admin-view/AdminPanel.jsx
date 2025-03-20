@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import SideBar from "@/components/admin-view/SideBar";
 import Navbar from "@/components/admin-view/Navbar";
@@ -8,6 +8,45 @@ import FileUpload from "@/components/admin-view/FileUpload";
 import ToGallery from "@/components/admin-view/ToGallery";
 
 const AdminPanel = () => {
+  const [accessGranted, setAccessGranted] = useState(false);
+  const [password, setPassword] = useState("");
+
+  const correctPassword = "AgentB24"; 
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (password === correctPassword) {
+      setAccessGranted(true);
+    } else {
+      alert("Incorrect password!");
+    }
+  };
+
+  if (!accessGranted) {
+    return (
+      <div className="flex justify-center items-center min-h-screen bg-gray-100">
+        <div className="bg-white p-6 rounded-lg shadow-lg">
+          <h2 className="text-lg font-bold mb-4">Admin Access</h2>
+          <form onSubmit={handleSubmit}>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter Admin Password"
+              className="border p-2 rounded w-full"
+            />
+            <button
+              type="submit"
+              className="mt-3 bg-blue-600 text-white px-4 py-2 rounded"
+            >
+              Enter
+            </button>
+          </form>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex h-screen bg-gray-100 overflow-hidden">
       {/* Sidebar */}

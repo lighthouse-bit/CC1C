@@ -45,7 +45,7 @@ const MeetOurTeam = () => {
       {/* Team Grid */}
       <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8">
         {teamMembers.map((member) => (
-          <div key={member.id} className="flex flex-col items-center text-center">
+          <div key={member.id} className="flex flex-col items-center text-center mb-20">
             <img
               src={`${API_BASE_URL}${member.image_path}`}
               alt={member.person_name}

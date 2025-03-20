@@ -53,7 +53,7 @@ const Home = () => {
                     <img
                         src={founder3} 
                         alt="Founder"
-                        className="w-80 h-60 object-cover shadow-xl"
+                        className="w-100 h-60 object-contain shadow-xl"
                     />
                     <p className="mt-3 text-gray-600">{founder.person_name}</p>
                     <p className="font-bold">{founder.role_name}</p>

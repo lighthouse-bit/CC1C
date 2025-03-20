@@ -41,7 +41,7 @@ const Carousel = () => {
   ];
 
   return (
-    <div className="w-full !m-0 !p-0 mb-10">
+    <div className="w-full !m-0 !p-0 mb-10 pt-30">
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
         spaceBetween={50}

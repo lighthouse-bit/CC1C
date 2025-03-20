@@ -2,7 +2,6 @@ import path from "path";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
   resolve: {
@@ -10,5 +9,9 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  assetsInclude: ['**/*.JPG', '**/*.jpg', '**/*.png','**/*.PNG'],
+  assetsInclude: ['**/*.JPG', '**/*.jpg', '**/*.png', '**/*.PNG'],
+  base: "/", // Ensures the base URL is correct for routing
+  server: {
+    historyApiFallback: true, // Enables proper fallback for routes like /admin
+  },
 });

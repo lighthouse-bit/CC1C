@@ -27,11 +27,10 @@ import AdvisoryBoard from "./components/NavBar/AboutUs/AdvisoryBoard";
 import AdminBlogForm from "./components/admin-view/AdminBlogForm";
 import BlogDetails from "./pages/Blog/BlogDetails";
 
-
 function App() {
-  const location = useLocation(); // Get the current route
+  const location = useLocation();
 
-  // Define routes where Navbar & Footer should be hidden
+  // Hide Navbar and Footer for ALL admin routes
   const hideNavbarAndFooter = location.pathname.startsWith("/admin");
 
   return (
@@ -40,32 +39,37 @@ function App() {
       {!hideNavbarAndFooter && <Navbar />}
 
       <Routes>
+        {/* Admin Routes */}
         <Route path="/admin" element={<AdminPanel />} />
+        <Route path="/admin/blogs/new" element={<AdminBlogForm />} />
+
+        {/* Public Routes */}
         <Route path="/" element={<Home />} />
         <Route path="/about-us" element={<AboutUs />} />
-        <Route path="about-us/vision-mission" element={<VisionMission />} />
-        <Route path="about-us/founder-message" element={<FounderMessage />} />
-        <Route path="about-us/our-team" element={<MeetOurTeam />} />
+        <Route path="/about-us/vision-mission" element={<VisionMission />} />
+        <Route path="/about-us/founder-message" element={<FounderMessage />} />
+        <Route path="/about-us/our-team" element={<MeetOurTeam />} />
         <Route path="/about-us/our-team/:id" element={<TeamMemberDetail />} />
-        <Route path="about-us/objectives" element={<ObjectivesSection />} />
-        <Route path="about-us/partners-sponsors" element={<PartCollab />} />
+        <Route path="/about-us/objectives" element={<ObjectivesSection />} />
+        <Route path="/about-us/partners-sponsors" element={<PartCollab />} />
+        <Route path="/about-us/advisory-board" element={<AdvisoryBoard />} />
+        
         <Route path="/programs" element={<ProgramsSection />} />
-        <Route path="programs/skills-development" element={<ClimateResilience />} />
-        <Route path="programs/youth-leadership" element={<YouthLeader />} />
-        <Route path="programs/local-conference" element={<LocalConference />} />
-        <Route path="programs/sustainable-farming" element={<YouthConsultant />} />
-        <Route path="programs/girls-leadership" element={<Afforestation />} />
-        <Route path="programs/youth-peace-security" element={<Hygiene />} />
-        <Route path="programs/climate-action" element={<Leadership />} />
+        <Route path="/programs/skills-development" element={<ClimateResilience />} />
+        <Route path="/programs/youth-leadership" element={<YouthLeader />} />
+        <Route path="/programs/local-conference" element={<LocalConference />} />
+        <Route path="/programs/sustainable-farming" element={<YouthConsultant />} />
+        <Route path="/programs/girls-leadership" element={<Afforestation />} />
+        <Route path="/programs/youth-peace-security" element={<Hygiene />} />
+        <Route path="/programs/climate-action" element={<Leadership />} />
+
         <Route path="/blog" element={<BlogSection />} />
-        <Route path="more/contact-us" element={<ContactUs />} />
+        <Route path="/blog/:id" element={<BlogDetails />} />
+        
+        <Route path="/more/contact-us" element={<ContactUs />} />
         <Route path="/donate" element={<MakeDonation />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/transfer-page" element={<DonationForm />} />
-        <Route path="about-us/advisory-board" element={<AdvisoryBoard />} />
-        <Route path="/admin/blogs/new" element={<AdminBlogForm />} />
-        <Route path="/blog/:id" element={<BlogDetails />} />
-        
       </Routes>
 
       {!hideNavbarAndFooter && <Footer />}

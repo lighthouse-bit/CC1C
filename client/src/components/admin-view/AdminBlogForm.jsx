@@ -79,7 +79,7 @@ const AdminBlogForm = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto mt-10 p-6 bg-white shadow-md rounded-lg">
+    <div className="max-w-3xl mx-auto mt-10 p-6 mb-20 bg-white shadow-md rounded-lg">
       <h2 className="text-xl font-bold text-blue-900 mb-4">Manage Blog Posts</h2>
 
       {message && <p className="text-green-600">{message}</p>}

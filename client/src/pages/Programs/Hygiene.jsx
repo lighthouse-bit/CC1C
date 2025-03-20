@@ -1,8 +1,5 @@
 import React from "react";
-import hygiene1 from "../../assets/hygiene1.png";
-import hygiene2 from "../../assets/hygiene2.png";
-import hygiene3 from "../../assets/hygiene3.png";
-import yps from "../../assets/yps.JPG"
+import ps from "../../assets/ps.jpg"
 
 const Hygiene = () => {
     return (
@@ -14,7 +11,7 @@ const Hygiene = () => {
         <hr className="my-2 border-gray-300" />
   
         {/* Image Grid */}
-        <img src={yps} alt="Team working together"  className="w-full max-w-full h-auto rounded-lg mt-6 object-cover"/>
+        <img src={ps} alt="Team working together"  className="w-full max-w-full h-auto rounded-lg mt-6 object-cover"/>
   
         {/* Description */}
         <div className="text-gray-700 mt-6 leading-relaxed space-y-6">

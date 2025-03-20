@@ -16,27 +16,27 @@ const Carousel = () => {
     {
       image: gl,
       text: "GIRLS LEADERSHIP AND EMPOWERMENT",
-      url: "programs/women-in-climate-resilience"
+      url: "/programs/girls-leadership"
     },
     {
       image: sd,
       text: "SKILLS DEVELPEMENT & JOB CREATION",
-      url: "programs/youth-leadership"
+      url: "/programs/skills-development"
     },
     {
       image: ps,
       text: "YOUTH, PEACE AND SECURITY",
-      url: "programs/local-conference"
+      url: "/programs/youth-peace-security"
     },
     {
       image: ca,
       text: "CLIMATE ACTION AND ADVOCACY",
-      url: "programs/affoerestation-projects"
+      url: "/programs/climate-action"
     },
     {
       image: sff,
       text: "SUSTAINABLE FARMING",
-      url: "programs/youth-consultation"
+      url: "/programs/sustainable-farming"
     },
   ];
 

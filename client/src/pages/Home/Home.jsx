@@ -50,14 +50,18 @@ const Home = () => {
             <div className=' p-6'><div className="max-w-6xl mx-auto bg-[#052F6B33]   p-6 rounded-2xl mb-20 flex flex-col md:flex-row items-center md:items-start shadow-lg">
                 {/* Image Section */}
                 <div className="md:w-1/3 flex flex-col items-center text-center">
-                    <img
-                        src={founder3} 
+                    <div className="w-40 h-40 rounded-full overflow-hidden shadow-xl bg-white flex justify-center items-center">
+                        <img
+                        src={`${API_BASE_URL}${founder.image_path}`}
                         alt="Founder"
-                        className="w-100 h-60 object-contain shadow-xl"
-                    />
+                        className="w-full h-full object-cover"
+                        />
+                    </div>
                     <p className="mt-3 text-gray-600">{founder.person_name}</p>
                     <p className="font-bold">{founder.role_name}</p>
                 </div>
+
+
 
                 {/* Text Section */}
                 <div className="md:w-2/3 mt-6 md:mt-0 md:ml-8 text-gray-700">

@@ -76,7 +76,7 @@ const AdminPanel = () => {
           </div>
 
           {/* File Upload */}
-          <FileUpload />
+          {/* <FileUpload /> */}
 
           {/* Gallery Upload */}
           <ToGallery />

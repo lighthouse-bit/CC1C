@@ -1,5 +1,5 @@
 import React from "react";
-import sjc from "../../assets/sjc.jpeg"
+import sd from "../../assets/sd.jpg"
 
 const ClimateResilience = () => {
     return (
@@ -11,7 +11,7 @@ const ClimateResilience = () => {
         <hr className="my-2 border-gray-300" />
   
         {/* Image Grid */}
-        <img src={sjc} alt="Team working together"  className="w-full max-w-full h-auto rounded-lg mt-6 object-cover"/>
+        <img src={sd} alt="Team working together"  className="w-full max-w-full h-auto rounded-lg mt-6 object-cover"/>
   
         {/* Description */}
         <div className="text-gray-700 mt-6 leading-relaxed space-y-6">

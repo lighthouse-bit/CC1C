@@ -49,7 +49,7 @@ const MeetOurTeam = () => {
             <img
               src={`${API_BASE_URL}${member.image_path}`}
               alt={member.person_name}
-              className="w-48 h-48 rounded-full object-contain md:w-52 md:h-52 shadow-lg"
+              className="w-40 h-40 rounded-full object-cover shadow-lg"
             />
             <p className="mt-3 text-gray-700">{member.person_name}</p>
             <p className="font-bold text-blue-900">{member.role_name}</p>

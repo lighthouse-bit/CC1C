@@ -34,9 +34,9 @@ const Home = () => {
         <Carousel />
         <div className="   mb-20">
             <div className="w-full max-w-6xl mx-auto text-center py-10 px-5">
-                <h2 className="text-2xl md:text-3xl font-bold text-blue-900">
+                <h1 className="text-2xl md:text-3xl font-bold text-blue-900">
                     CENTER FOR COMMUNITY IMPACT AND SUSTAINABILITY
-                </h2>
+                </h1>
                 <p className="text-gray-700 mt-4 leading-relaxed">
                 The Centre for Community Impact and Sustainability (CCIS) is a dynamic youth-led organization dedicated to empowering communities through sustainable development initiatives. CCIS addresses pressing global challenges by fostering youth leadership, promoting inclusive growth, and driving impactful initiatives that create lasting change. Through innovative solutions and strategic engagement, CCIS ensures that marginalized communities are actively involved in decision-making and sustainable development efforts.
 
@@ -53,7 +53,7 @@ const Home = () => {
                     <div className="w-40 h-40 rounded-full overflow-hidden shadow-xl bg-white flex justify-center items-center">
                         <img
                         src={`${API_BASE_URL}${founder.image_path}`}
-                        alt="Founder"
+                        alt="Founder of CCIS"
                         className="w-full h-full object-cover"
                         />
                     </div>

@@ -15,6 +15,7 @@ dotenv.config();
 const app = express();
 const allowedOrigins = ["https://cc-1-c.vercel.app", "http://localhost:5173"];
 
+
 app.use(cors());
 
 
@@ -167,6 +168,10 @@ app.get("/api/gallery", async (req, res) => {
 
   res.json(data);
 });
+
+
+
+
 
 
 

@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
 
+
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
 const categories = [
   "Farm Programs", "Students", "Donors and Partners", "Events", "Trainings"
 ];
@@ -31,7 +34,7 @@ const ToGallery = () => {
 
     try {
       setUploading(true);
-      const response = await axios.post("http://localhost:5000/api/gallery/upload", formData, {
+      const response = await axios.post(`${API_BASE_URL}/upload`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 

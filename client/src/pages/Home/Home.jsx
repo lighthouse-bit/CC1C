@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import Carousel from '../../components/Home/Carousel'
 import founder3 from '../../assets/founder3.jpg'
 import donate from '../../assets/donate.png'
@@ -57,7 +58,7 @@ const Home = () => {
                         className="w-full h-full object-cover"
                         />
                     </div>
-                    <p className="mt-3 text-gray-600">{founder.person_name}</p>
+                    <Link to='admin'><p className="mt-3 text-gray-600">{founder.person_name}</p></Link>
                     <p className="font-bold">{founder.role_name}</p>
                 </div>
 

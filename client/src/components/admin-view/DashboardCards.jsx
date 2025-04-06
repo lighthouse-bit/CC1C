@@ -1,9 +1,9 @@
 const DashboardCards = () => {
     const stats = [
-      { title: "Used Space", value: "20/50gb", color: "bg-yellow-100" },
-      { title: "Donations", value: "$21,000", color: "bg-green-100" },
-      { title: "Messages", value: "14", color: "bg-pink-100" },
-      { title: "New Followers", value: "26", color: "bg-purple-100" },
+      { title: "Used Space", value: "", color: "bg-yellow-100" },
+      { title: "Donations", value: "", color: "bg-green-100" },
+      { title: "Messages", value: "", color: "bg-pink-100" },
+      { title: "New Followers", value: "", color: "bg-purple-100" },
     ];
   
     return (

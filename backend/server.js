@@ -16,7 +16,14 @@ const app = express();
 // const allowedOrigins = ["https://cc-1-c.vercel.app", "http://localhost:5173"];
 
 
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:5173', 
+    'https://cc-1-c-xi.vercel.app'  
+  ],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 
 app.use(express.json());

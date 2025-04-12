@@ -13,10 +13,17 @@ import blogRoutes from "./routes/blog.js";
 dotenv.config();
 
 const app = express();
-const allowedOrigins = ["https://cc-1-c.vercel.app", "http://localhost:5173"];
+// const allowedOrigins = ["https://cc-1-c.vercel.app", "http://localhost:5173"];
 
 
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:5173', 
+    'https://cc-1-c-xi.vercel.app'  
+  ],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 
 app.use(express.json());
@@ -73,7 +80,11 @@ import { dirname } from "path";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-app.use("/upload", express.static(path.join(__dirname, "upload")));
+app.use("/upload", express.static(path.join(__dirname, "upload"), {
+  setHeaders: (res) => {
+    res.header("Access-Control-Allow-Origin", "http://localhost:5173");
+  }
+}));
 
 
 
@@ -139,23 +150,45 @@ app.post("/api/upload", upload.single("file"), (req, res) => {
 
 // Upload Image API for Gallery
 app.post("/api/gallery/upload", upload.single("file"), async (req, res) => {
-  if (!req.file) {
-    return res.status(400).json({ message: "No file uploaded" });
+  try {
+    if (!req.file) {
+      return res.status(400).json({ message: "No file uploaded" });
+    }
+
+    if (!req.body.category) {
+      return res.status(400).json({ message: "Category is required" });
+    }
+
+    const { category } = req.body;
+    const filePath = `/upload/${req.file.filename}`;
+
+    const { error } = await supabase.from("gallery").insert([
+      { image_path: filePath, category },
+    ]);
+
+    if (error) {
+      console.error("Database error:", error);
+      // Remove the uploaded file if DB insert fails
+      fs.unlinkSync(req.file.path);
+      return res.status(500).json({ message: "Error saving to database" });
+    }
+
+    res.json({ 
+      success: true,
+      filePath,
+      message: "File uploaded successfully!" 
+    });
+    
+  } catch (err) {
+    console.error("Upload error:", err);
+    if (req.file) {
+      // Clean up uploaded file on error
+      fs.unlinkSync(req.file.path).catch(console.error);
+    }
+    res.status(500).json({ message: "Server error during upload" });
   }
-
-  const { category } = req.body;
-
-  const { error } = await supabase.from("gallery").insert([
-    { image_path: `/upload/${req.file.filename}`, category },
-  ]);
-
-  if (error) {
-    console.error("Database error:", error);
-    return res.status(500).json({ message: "Error saving to database" });
-  }
-
-  res.json({ filePath: `/upload/${req.file.filename}`, message: "File uploaded successfully!" });
 });
+
 
 // Fetch all gallery images
 app.get("/api/gallery", async (req, res) => {

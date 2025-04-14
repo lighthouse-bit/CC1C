@@ -21,7 +21,7 @@ const MeetOurTeam = () => {
       .then((data) => {
         // Filter out "Advisory Board"
         const filteredRoles = data.filter(
-          (role) => role.role_name && role.role_name.toLowerCase() !== "advisory board"
+          (role) => !/^(advisory board|executive board)$/i.test(role.role_name?.trim())
         );
 
         // Sort roles based on hierarchy, others follow in default order

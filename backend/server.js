@@ -16,23 +16,7 @@ const app = express();
 // const allowedOrigins = ["https://cc-1-c.vercel.app", "http://localhost:5173"];
 
 
-// app.use(cors({
-//   origin: [
-//     'http://localhost:5173', 
-//     'https://cc-1-c-xi.vercel.app'  
-//   ],
-//   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-//   allowedHeaders: ['Content-Type', 'Authorization']
-// }));
-
-
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173'); // Or your specific origins
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  res.setHeader('Access-Control-Allow-Credentials', 'true'); // If you need credentials
-  next();
-});
+app.use(cors());
 
 
 app.use(express.json());

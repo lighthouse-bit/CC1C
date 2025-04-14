@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 const categories = [
-  "All Photos", "Farm Programs", "Students", "Donors and Partners", "Events", "Trainings"
+  "All Photos", "Conferences", "Trainings", "Advocacy Efforts", "Community Outreach", "Programs"
 ];
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";

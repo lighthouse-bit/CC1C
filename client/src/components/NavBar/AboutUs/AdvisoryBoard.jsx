@@ -14,7 +14,7 @@ const AdvisoryBoard = () => {
     console.log("Fetched roles:", data); 
 
     const advisoryBoardRoles = data.filter(
-      (role) => role.role_name && role.role_name.toLowerCase().trim() === "advisory board"
+      (role) => role.role_name && role.role_name.toLowerCase().trim() === "advisory board" && role.role_name.toLowerCase().trim() === "executive board"
     );
 
     setTeamMembers(advisoryBoardRoles);

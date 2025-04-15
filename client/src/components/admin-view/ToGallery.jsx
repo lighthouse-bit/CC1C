@@ -11,67 +11,38 @@ const ToGallery = () => {
   const [file, setFile] = useState(null);
   const [category, setCategory] = useState("");
   const [uploading, setUploading] = useState(false);
-  const [message, setMessage] = useState({ text: "", isError: false });
+  const [message, setMessage] = useState("");
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
-    setMessage({ text: "", isError: false });
   };
 
   const handleCategoryChange = (e) => {
     setCategory(e.target.value);
-    setMessage({ text: "", isError: false });
   };
 
   const handleUpload = async () => {
-    if (!file) {
-      setMessage({ text: "Please select a file", isError: true });
-      return;
-    }
-    if (!category) {
-      setMessage({ text: "Please select a category", isError: true });
+    if (!file || !category) {
+      setMessage("Please select a file and a category.");
       return;
     }
 
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("category", category);
+    formData.append("category", category); // Send category to the server
 
     try {
       setUploading(true);
-      setMessage({ text: "Uploading...", isError: false });
+      const response = await axios.post("http://localhost:5000/api/gallery/upload", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
 
-      const response = await axios.post(
-        `${API_BASE_URL}/api/gallery/upload`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          }
-          // Removed the withCredentials: true option
-        }
-      );
-
-      setMessage({ text: response.data.message, isError: false });
+      setMessage(response.data.message);
       setFile(null);
-      setCategory("");
-      
-      const fileInput = document.querySelector('input[type="file"]');
-      if (fileInput) fileInput.value = "";
-      
+      setCategory(""); // Reset category after upload
     } catch (error) {
-      let errorMessage = "Upload failed";
-      
-      if (error.response) {
-        errorMessage = error.response.data.message || error.response.statusText;
-      } else if (error.request) {
-        errorMessage = "No response from server - check your connection";
-      } else {
-        errorMessage = error.message;
-      }
-      
-      setMessage({ text: errorMessage, isError: true });
-      console.error("Upload error details:", error);
+      setMessage("Upload failed");
+      console.error("Upload error:", error);
     } finally {
       setUploading(false);
     }

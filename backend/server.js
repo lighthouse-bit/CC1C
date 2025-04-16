@@ -1,32 +1,49 @@
 import express from "express";
 import cors from "cors";
-import supabase from "./Database/db.js"; 
-import path from "path";
-import multer from "multer";
 import dotenv from "dotenv";
-import nodemailer from "nodemailer"
+import multer from "multer";
+import path from "path";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+import supabase from "./Database/db.js";
 import blogRoutes from "./routes/blog.js";
-import fs from 'fs';
-
-
-
+import nodemailer from "nodemailer";
 
 dotenv.config();
 
 const app = express();
-// const allowedOrigins = ["https://cc-1-c.vercel.app", "http://localhost:5173"];
 
-
+// Middleware
 app.use(cors());
-
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/api/blogs", blogRoutes);
 
+// Static file serving for uploaded images
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+app.use(
+  "/upload",
+  express.static(path.join(__dirname, "upload"), {
+    setHeaders: (res) => {
+      res.header("Access-Control-Allow-Origin", "http://localhost:5173");
+    },
+  })
+);
 
+// Multer config for local upload
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "upload/");
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + "-" + file.originalname);
+  },
+});
+const upload = multer({ storage });
+
+// Contact form
 app.post("/api/contact", async (req, res) => {
- 
   const { name, email, message } = req.body;
 
   if (!name || !email || !message) {
@@ -52,48 +69,81 @@ app.post("/api/contact", async (req, res) => {
     await transporter.sendMail(mailOptions);
     res.json({ success: true, message: "Email sent successfully!" });
   } catch (error) {
-    
+    console.error("Email Error:", error);
     res.status(500).json({ error: "Failed to send email. Try again later." });
   }
 });
 
 
-app.post("/api/contact", (req, res) => {
-  console.log("Received data:", req.body);
-  res.json({ success: true, message: "Request received!" });
-});
 
 
-
-
-
-// Set up static folder to serve uploaded files
-import { fileURLToPath } from "url";
-import { dirname } from "path";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-app.use("/upload", express.static(path.join(__dirname, "upload"), {
-  setHeaders: (res) => {
-    res.header("Access-Control-Allow-Origin", "http://localhost:5173");
+app.post("/api/gallery/upload", upload.single("file"), async (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({ message: "No file uploaded" });
   }
-}));
 
+  try {
+    // Generate a unique file path for the image
+    const filePath = `gallery/${Date.now()}-${req.file.originalname}`;
 
+    // Upload the image to Supabase Storage
+    const { data, error } = await supabase.storage
+      .from("gallery")  // The name of your Supabase bucket
+      .upload(filePath, req.file.buffer, {
+        contentType: req.file.mimetype, // Set MIME type
+        upsert: true, // Allow overwriting files with the same name
+      });
 
+    if (error) {
+      console.error("Error uploading to Supabase:", error);
+      return res.status(500).json({ message: "Error uploading file to Supabase" });
+    }
 
-// Configure Multer storage
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "upload/"); // Save files inside the "upload" folder
-  },
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + "-" + file.originalname); // Rename files
-  },
+    // Get the public URL of the uploaded file
+    const { publicURL, error: urlError } = supabase.storage
+      .from("gallery")
+      .getPublicUrl(filePath);
+
+    if (urlError) {
+      console.error("Error fetching public URL:", urlError);
+      return res.status(500).json({ message: "Error fetching file URL" });
+    }
+
+    // Optionally, save the file URL in the database
+    const { data: dbData, error: dbError } = await supabase
+      .from("gallery")
+      .insert([
+        { image_path: publicURL, category: req.body.category }, // Customize your insert as needed
+      ]);
+
+    if (dbError) {
+      console.error("Database error:", dbError);
+      return res.status(500).json({ message: "Error saving to database" });
+    }
+
+    // Send the public URL and success message in the response
+    res.json({ filePath: publicURL, message: "File uploaded successfully!" });
+  } catch (error) {
+    console.error("Error uploading file:", error);
+    res.status(500).json({ message: "Server error" });
+  }
 });
-const upload = multer({ storage });
 
+
+// Get all gallery images
+app.get("/api/gallery", async (req, res) => {
+  const { data, error } = await supabase
+    .from("gallery")
+    .select("*")
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    console.error("Error fetching gallery images:", error);
+    return res.status(500).json({ message: "Server error" });
+  }
+
+  res.json(data);
+});
 
 // Fetch all roles
 app.get("/api/roles", async (req, res) => {
@@ -107,10 +157,14 @@ app.get("/api/roles", async (req, res) => {
   res.json(data);
 });
 
-// Fetch a role by ID
+// Fetch role by ID
 app.get("/api/roles/:id", async (req, res) => {
   const { id } = req.params;
-  const { data, error } = await supabase.from("roles").select("*").eq("id", id).single();
+  const { data, error } = await supabase
+    .from("roles")
+    .select("*")
+    .eq("id", id)
+    .single();
 
   if (error || !data) {
     return res.status(404).json({ message: "Role not found" });
@@ -119,73 +173,26 @@ app.get("/api/roles/:id", async (req, res) => {
   res.json(data);
 });
 
-// Fetch roles by role name (case-insensitive search)
+// Fetch role by role_name (case-insensitive)
 app.get("/api/roles/role/:role_name", async (req, res) => {
   const { role_name } = req.params;
   const { data, error } = await supabase
     .from("roles")
     .select("*")
-    .ilike("role_name", `%${role_name}%`); // Case-insensitive search
+    .ilike("role_name", `%${role_name}%`);
 
   if (error || !data.length) {
     return res.status(404).json({ message: "Role not found" });
   }
 
-  res.json(data[0]); // Return the first match
+  res.json(data[0]);
 });
 
-// File upload route
-app.post("/api/upload", upload.single("file"), (req, res) => {
-  if (!req.file) {
-    return res.status(400).json({ message: "No file uploaded" });
-  }
-  res.json({ filePath: `/upload/${req.file.filename}`, message: "File uploaded successfully!" });
-});
-
-// Upload Image API for Gallery
-app.post("/api/gallery/upload", upload.single("file"), async (req, res) => {
-  if (!req.file) {
-    return res.status(400).json({ message: "No file uploaded" });
-  }
-
-  const { category } = req.body;
-
-  const { error } = await supabase.from("gallery").insert([
-    { image_path: `/upload/${req.file.filename}`, category },
-  ]);
-
-  if (error) {
-    console.error("Database error:", error);
-    return res.status(500).json({ message: "Error saving to database" });
-  }
-
-  res.json({ filePath: `/upload/${req.file.filename}`, message: "File uploaded successfully!" });
-});
-
-// Fetch all gallery images
-app.get("/api/gallery", async (req, res) => {
-  const { data, error } = await supabase.from("gallery").select("*").order("created_at", { ascending: false });
-
-  if (error) {
-    console.error("Error fetching gallery images:", error);
-    return res.status(500).json({ message: "Server error" });
-  }
-
-  res.json(data);
-});
-
-
-
-
-
-
-
+// Error handler
 app.use((err, req, res, next) => {
   console.error("Server error:", err);
   res.status(500).json({ error: "Internal server error" });
 });
-
-
 
 // Start server
 const PORT = process.env.PORT || 5000;

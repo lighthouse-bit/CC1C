@@ -30,10 +30,13 @@ const storage = multer.diskStorage({
     cb(null, "upload/"); // Store uploaded images in the 'upload/' folder
   },
   filename: (req, file, cb) => {
-    cb(null, Date.now() + "-" + file.originalname); // Create a unique filename
+    const uniqueFilename = Date.now() + "-" + file.originalname; // Use consistent filename
+    cb(null, uniqueFilename); // Save with consistent filename
   },
 });
+
 const upload = multer({ storage });
+
 
 // Contact form
 app.post("/api/contact", async (req, res) => {
@@ -74,10 +77,10 @@ app.post("/api/gallery/upload", upload.single("file"), async (req, res) => {
   }
 
   try {
-    // Generate the file path for the image
-    const filePath = `/upload/${Date.now()}-${req.file.originalname}`;
+    // Generate the consistent file path for the image
+    const filePath = `/upload/${req.file.filename}`;
 
-    // Save the file path in Supabase DB (not in Supabase storage)
+    // Save the file path in Supabase DB with the consistent filename
     const { error: dbError } = await supabase
       .from("gallery")
       .insert([{ image_path: filePath, category: req.body.category }]);
@@ -94,6 +97,7 @@ app.post("/api/gallery/upload", upload.single("file"), async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
+
 
 // Fetch all gallery images
 app.get("/api/gallery", async (req, res) => {

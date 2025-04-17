@@ -34,10 +34,10 @@ app.use(
 // Multer config for local upload
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "upload/");
+    cb(null, "upload/"); // Store uploaded images in the 'upload/' folder
   },
   filename: (req, file, cb) => {
-    cb(null, Date.now() + "-" + file.originalname);
+    cb(null, Date.now() + "-" + file.originalname); // Create a unique filename
   },
 });
 const upload = multer({ storage });
@@ -74,68 +74,37 @@ app.post("/api/contact", async (req, res) => {
   }
 });
 
-
-
-
+// Upload gallery image to local storage
 app.post("/api/gallery/upload", upload.single("file"), async (req, res) => {
   if (!req.file) {
     return res.status(400).json({ message: "No file uploaded" });
   }
 
   try {
-    // Generate a unique file path for the image
-    const filePath = `gallery/${Date.now()}-${req.file.originalname}`;
+    // Generate the file path for the image
+    const filePath = `/upload/${Date.now()}-${req.file.originalname}`;
 
-    // Upload the image to Supabase Storage
-    const { data, error } = await supabase.storage
-      .from("gallery")  // The name of your Supabase bucket
-      .upload(filePath, req.file.buffer, {
-        contentType: req.file.mimetype, // Set MIME type
-        upsert: true, // Allow overwriting files with the same name
-      });
-
-    if (error) {
-      console.error("Error uploading to Supabase:", error);
-      return res.status(500).json({ message: "Error uploading file to Supabase" });
-    }
-
-    // Get the public URL of the uploaded file
-    const { publicURL, error: urlError } = supabase.storage
+    // Save the file path in Supabase DB (not in Supabase storage)
+    const { error: dbError } = await supabase
       .from("gallery")
-      .getPublicUrl(filePath);
-
-    if (urlError) {
-      console.error("Error fetching public URL:", urlError);
-      return res.status(500).json({ message: "Error fetching file URL" });
-    }
-
-    // Optionally, save the file URL in the database
-    const { data: dbData, error: dbError } = await supabase
-      .from("gallery")
-      .insert([
-        { image_path: publicURL, category: req.body.category }, // Customize your insert as needed
-      ]);
+      .insert([{ image_path: filePath, category: req.body.category }]);
 
     if (dbError) {
       console.error("Database error:", dbError);
       return res.status(500).json({ message: "Error saving to database" });
     }
 
-    // Send the public URL and success message in the response
-    res.json({ filePath: publicURL, message: "File uploaded successfully!" });
+    // Respond with the file path (now stored locally)
+    res.json({ filePath, message: "File uploaded successfully!" });
   } catch (error) {
-    console.error("Error uploading file:", error);
+    console.error("Unexpected error:", error);
     res.status(500).json({ message: "Server error" });
   }
 });
 
-
-// Get all gallery images
+// Fetch all gallery images
 app.get("/api/gallery", async (req, res) => {
-  const { data, error } = await supabase
-    .from("gallery")
-    .select("*")
-    .order("created_at", { ascending: false });
+  const { data, error } = await supabase.from("gallery").select("*").order("created_at", { ascending: false });
 
   if (error) {
     console.error("Error fetching gallery images:", error);
@@ -197,4 +166,3 @@ app.use((err, req, res, next) => {
 // Start server
 const PORT = process.env.PORT || 5000;
 export default app;
-

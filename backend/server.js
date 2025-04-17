@@ -22,14 +22,7 @@ app.use("/api/blogs", blogRoutes);
 // Static file serving for uploaded images
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-app.use(
-  "/upload",
-  express.static(path.join(__dirname, "upload"), {
-    setHeaders: (res) => {
-      res.header("Access-Control-Allow-Origin", "http://localhost:5173");
-    },
-  })
-);
+app.use("/upload", express.static(path.join(__dirname, "upload")));
 
 // Multer config for local upload
 const storage = multer.diskStorage({

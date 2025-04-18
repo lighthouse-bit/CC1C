@@ -8,6 +8,7 @@ import { dirname } from "path";
 import supabase from "./Database/db.js";
 import blogRoutes from "./routes/blog.js";
 import nodemailer from "nodemailer";
+import fs from "fs";
 
 dotenv.config();
 
@@ -110,6 +111,41 @@ app.get("/api/gallery", async (req, res) => {
 
   res.json(data);
 });
+
+
+
+// Use wildcard * to capture slashes in filename like "upload/image.jpg"
+app.delete("/api/gallery/*", async (req, res) => {
+  try {
+    const imagePath = decodeURIComponent(req.params[0]); // e.g. upload/filename.jpg
+    console.log("Requested delete:", imagePath);
+
+    const { error: dbError } = await supabase
+      .from("gallery")
+      .delete()
+      .eq("image_path", `/${imagePath}`); // depends if you saved with or without '/'
+
+    if (dbError) {
+      console.error("Supabase delete error:", dbError);
+      return res.status(500).json({ error: "Database deletion failed" });
+    }
+
+    // Optional: delete locally if needed
+    const filePath = path.join(__dirname, imagePath);
+    fs.unlink(filePath, (err) => {
+      if (err) {
+        console.warn("File deletion warning:", err.message);
+      }
+    });
+
+    res.json({ message: "Image deleted" });
+  } catch (err) {
+    console.error("Delete error:", err);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+
 
 // Fetch all roles
 app.get("/api/roles", async (req, res) => {

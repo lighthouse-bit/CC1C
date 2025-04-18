@@ -5,6 +5,7 @@ import Navbar from "@/components/admin-view/Navbar";
 import DashboardCards from "@/components/admin-view/DashboardCards";
 import Updates from "@/components/admin-view/Updates";
 import ToGallery from "@/components/admin-view/ToGallery";
+import { Button } from "@/components/ui/button";
 
 const AdminPanel = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -79,6 +80,7 @@ const AdminPanel = () => {
           </div>
 
           <ToGallery />
+          
           <Updates />
         </main>
       </div>

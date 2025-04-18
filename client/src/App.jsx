@@ -26,6 +26,7 @@ import DonationForm from "./components/Donate/DonationForm";
 import AdvisoryBoard from "./components/NavBar/AboutUs/AdvisoryBoard";
 import AdminBlogForm from "./components/admin-view/AdminBlogForm";
 import BlogDetails from "./pages/Blog/BlogDetails";
+import GalleryDeleteComponent from "./components/admin-view/GalleryDeleteComponent";
 
 function App() {
   const location = useLocation();
@@ -42,6 +43,7 @@ function App() {
         {/* Admin Routes */}
         <Route path="/admin" element={<AdminPanel />} />
         <Route path="/admin/blogs/new" element={<AdminBlogForm />} />
+        <Route path="/admin/gallery-del" element={<GalleryDeleteComponent />} />
 
         {/* Public Routes */}
         <Route path="/" element={<Home />} />
@@ -70,6 +72,7 @@ function App() {
         <Route path="/donate" element={<MakeDonation />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/transfer-page" element={<DonationForm />} />
+        
       </Routes>
 
       {!hideNavbarAndFooter && <Footer />}

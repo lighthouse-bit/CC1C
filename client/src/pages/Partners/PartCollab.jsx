@@ -2,8 +2,9 @@ import React from 'react';
 import partner1 from "../../assets/partner1.jpg";
 import partner2 from "../../assets/partner2.JPG";
 import partner4 from "../../assets/partner4.jpg";
+import stc from "../../assets/stc.jpg";
 
-const partners = [partner1, partner2, partner4];
+const partners = [partner1, partner2, partner4,stc];
 
 const PartCollab = () => {
   return (

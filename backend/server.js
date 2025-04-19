@@ -5,7 +5,7 @@ import multer from "multer";
 import path from "path";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
-import supabase from "./Database/db.js";
+import supabase from "./Database/db.js"; // Import Supabase client
 import blogRoutes from "./routes/blog.js";
 import nodemailer from "nodemailer";
 import fs from "fs";
@@ -20,24 +20,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/api/blogs", blogRoutes);
 
-// Static file serving for uploaded images
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-app.use("/upload", express.static(path.join(__dirname, "upload")));
-
-// Multer config for local upload
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "upload/"); // Store uploaded images in the 'upload/' folder
-  },
-  filename: (req, file, cb) => {
-    const uniqueFilename = Date.now() + "-" + file.originalname; // Use consistent filename
-    cb(null, uniqueFilename); // Save with consistent filename
-  },
-});
-
+// Multer config for in-memory upload (no local storage)
+const storage = multer.memoryStorage(); 
 const upload = multer({ storage });
-
 
 // Contact form
 app.post("/api/contact", async (req, res) => {
@@ -71,33 +56,60 @@ app.post("/api/contact", async (req, res) => {
   }
 });
 
-// Upload gallery image to local storage
 app.post("/api/gallery/upload", upload.single("file"), async (req, res) => {
+  console.log("🔔 Route reached");
+  console.log("File received:", req.file?.originalname);
+  console.log("Category received:", req.body?.category);
+
   if (!req.file) {
     return res.status(400).json({ message: "No file uploaded" });
   }
 
   try {
-    // Generate the consistent file path for the image
-    const filePath = `/upload/${req.file.filename}`;
+    const bucketName = "galleria";
+    const filePath = `uploads/${Date.now()}_${req.file.originalname}`;
 
-    // Save the file path in Supabase DB with the consistent filename
-    const { error: dbError } = await supabase
-      .from("gallery")
-      .insert([{ image_path: filePath, category: req.body.category }]);
+    // Upload to Supabase
+    const { data, error: uploadError } = await supabase.storage
+      .from(bucketName)
+      .upload(filePath, req.file.buffer, {
+        contentType: req.file.mimetype,
+        upsert: true,
+      });
 
-    if (dbError) {
-      console.error("Database error:", dbError);
-      return res.status(500).json({ message: "Error saving to database" });
+    if (uploadError) {
+      console.error("Upload Error:", uploadError);
+      return res.status(500).json({ message: "Error uploading to Supabase", error: uploadError });
     }
 
-    // Respond with the file path (now stored locally)
-    res.json({ filePath, message: "File uploaded successfully!" });
+    const publicURL = `https://fxvvrieqefxovspeveba.supabase.co/storage/v1/object/public/${bucketName}/${filePath}`;
+    console.log("✅ Final Public URL:", publicURL);
+
+    if (!publicURL || typeof publicURL !== "string") {
+      return res.status(500).json({ message: "Failed to generate public URL" });
+    }
+
+    const { error: dbError } = await supabase
+      .from("gallery")
+      .insert([
+        {
+          image_path: publicURL,
+          category: req.body.category,
+        },
+      ]);
+
+    if (dbError) {
+      console.error("❌ Database Error:", dbError);
+      return res.status(500).json({ message: "Error saving to database", error: dbError });
+    }
+
+    res.json({ imagePath: publicURL, message: "✅ File uploaded successfully!" });
   } catch (error) {
-    console.error("Unexpected error:", error);
-    res.status(500).json({ message: "Server error" });
+    console.error("Unexpected error:", error.message, error.stack);
+    res.status(500).json({ message: "Server error", error });
   }
 });
+
 
 
 // Fetch all gallery images
@@ -112,31 +124,21 @@ app.get("/api/gallery", async (req, res) => {
   res.json(data);
 });
 
-
-
-// Use wildcard * to capture slashes in filename like "upload/image.jpg"
-app.delete("/api/gallery/*", async (req, res) => {
+// Use parameter for dynamic file path in delete route
+app.delete("/api/gallery/:path", async (req, res) => {
   try {
-    const imagePath = decodeURIComponent(req.params[0]); // e.g. upload/filename.jpg
+    const imagePath = decodeURIComponent(req.params.path); // e.g. uploads/filename.jpg
     console.log("Requested delete:", imagePath);
 
     const { error: dbError } = await supabase
       .from("gallery")
       .delete()
-      .eq("image_path", `/${imagePath}`); // depends if you saved with or without '/'
+      .eq("image_path", `/${imagePath}`); // Assumes your file path is stored with the leading slash
 
     if (dbError) {
       console.error("Supabase delete error:", dbError);
       return res.status(500).json({ error: "Database deletion failed" });
     }
-
-    // Optional: delete locally if needed
-    const filePath = path.join(__dirname, imagePath);
-    fs.unlink(filePath, (err) => {
-      if (err) {
-        console.warn("File deletion warning:", err.message);
-      }
-    });
 
     res.json({ message: "Image deleted" });
   } catch (err) {
@@ -144,8 +146,6 @@ app.delete("/api/gallery/*", async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
-
-
 
 // Fetch all roles
 app.get("/api/roles", async (req, res) => {

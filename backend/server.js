@@ -24,6 +24,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/api/blogs", blogRoutes);
 
+
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+app.use("/upload", express.static(path.join(__dirname, "upload")));
+
 // Multer config for in-memory upload (no local storage)
 const storage = multer.memoryStorage(); 
 const upload = multer({ storage });

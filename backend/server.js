@@ -132,36 +132,36 @@ app.get("/api/gallery", async (req, res) => {
 
 // Use parameter for dynamic file path in delete route
 app.delete("/api/gallery", async (req, res) => {
-  const { key } = req.query; // e.g., "uploads/filename.jpg"
+  const { key } = req.query; // Should be like "uploads/filename.jpg"
   if (!key) return res.status(400).json({ error: "Missing key" });
 
   try {
-    // Delete from Supabase Storage
+    // Step 1: Delete from Supabase Storage
     const { error: storageError } = await supabase
       .storage
-      .from("galleria") 
+      .from("galleria") // Match your actual bucket name
       .remove([key]);
 
     if (storageError) {
-      console.error("Supabase storage delete error:", storageError);
+      console.error("Storage deletion error:", storageError);
       return res.status(500).json({ error: "Failed to delete from storage" });
     }
 
-    // Delete from gallery table
+    // Step 2: Delete from database
     const { error: dbError } = await supabase
       .from("gallery")
       .delete()
-      .eq("image_path", `/${key}`); 
+      .eq("image_path", `/${key}`); // Ensure DB stores path with leading slash!
 
     if (dbError) {
-      console.error("Supabase DB delete error:", dbError);
-      return res.status(500).json({ error: "Failed to delete from database" });
+      console.error("DB deletion error:", dbError);
+      return res.status(500).json({ error: "Failed to delete from DB" });
     }
 
     res.json({ message: "Image deleted successfully" });
   } catch (err) {
-    console.error("Server delete error:", err);
-    res.status(500).json({ error: "Internal server error" });
+    console.error("General delete error:", err);
+    res.status(500).json({ error: "Server error" });
   }
 });
 

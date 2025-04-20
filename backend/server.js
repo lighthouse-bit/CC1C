@@ -5,7 +5,7 @@ import multer from "multer";
 import path from "path";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
-import supabase from "./Database/db.js"; // Import Supabase client
+import supabase from "./Database/db.js"; 
 import blogRoutes from "./routes/blog.js";
 import nodemailer from "nodemailer";
 import fs from "fs";

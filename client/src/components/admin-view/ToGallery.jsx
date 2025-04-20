@@ -13,7 +13,7 @@ const ToGallery = () => {
   const [file, setFile] = useState(null);
   const [category, setCategory] = useState("");
   const [uploading, setUploading] = useState(false);
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState({ text: "", isError: false });
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
@@ -25,7 +25,7 @@ const ToGallery = () => {
 
   const handleUpload = async () => {
     if (!file || !category) {
-      setMessage("Please select a file and a category.");
+      setMessage({ text: "Please select a file and a category.", isError: true });
       return;
     }
 
@@ -35,16 +35,17 @@ const ToGallery = () => {
 
     try {
       setUploading(true);
-      const response = await axios.post("http://localhost:5000/api/gallery/upload", formData, {
+      const response = await axios.post(`${API_BASE_URL}/api/gallery/upload`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
-      setMessage(response.data.message);
+      setMessage({ text: response.data.message, isError: false });
       setFile(null);
-      setCategory(""); // Reset category after upload
+      setCategory("");
     } catch (error) {
-      setMessage("Upload failed");
-      console.error("Upload error:", error);
+      setMessage({ text: "Upload failed", isError: true });
+      console.error("Upload error:", error.response?.data || error.message || error);
+
     } finally {
       setUploading(false);
     }

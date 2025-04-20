@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import axios from 'axios';
 
 const categories = [
   "All Photos", "Conferences", "Trainings", "Advocacy Efforts", "Community Outreach", "Programs"
@@ -10,18 +11,30 @@ const Gallery = () => {
   const [selectedCategory, setSelectedCategory] = useState("All Photos");
   const [images, setImages] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
+   const [loading, setLoading] = useState(true);
 
+  // Fetch gallery images
   useEffect(() => {
-    fetch(`${API_BASE_URL}/api/gallery`) 
-      .then((response) => response.json())
-      .then((data) => setImages(data))
-      .catch((error) => console.error("Error fetching gallery images:", error));
+    const fetchImages = async () => {
+      try {
+        const response = await axios.get(`${API_BASE_URL}/api/gallery`);
+        setImages(response.data);
+      } catch (error) {
+        console.error('Error fetching images:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchImages();
   }, []);
 
   const filteredImages = selectedCategory === "All Photos" 
     ? images 
     : images.filter(img => img.category === selectedCategory);
 
+
+  if (loading) return <div className="text-center py-10 text-gray-500">Loading gallery...</div>;
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-xl font-bold mb-4 text-blue-900">GALLERY</h1>
@@ -45,7 +58,7 @@ const Gallery = () => {
         {filteredImages.map((img, index) => (
           <img
             key={index}
-            src={`${API_BASE_URL}${img.image_path}`}
+            src={img.image_path}
 
             alt={`Gallery ${index}`}
             className="w-full h-auto rounded-md shadow-md cursor-pointer hover:scale-105 transition-transform"

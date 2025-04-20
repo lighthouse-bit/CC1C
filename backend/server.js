@@ -132,14 +132,19 @@ app.get("/api/gallery", async (req, res) => {
 
 // Use parameter for dynamic file path in delete route
 app.delete("/api/gallery", async (req, res) => {
-  const { key } = req.query; // Should be like "uploads/filename.jpg"
-  if (!key) return res.status(400).json({ error: "Missing key" });
+  const { fullUrl } = req.query;
+
+  if (!fullUrl) return res.status(400).json({ error: "Missing image URL" });
 
   try {
-    // Step 1: Delete from Supabase Storage
+    // ✅ Step 1: Extract the object key from the full URL
+    const baseUrl = "https://fxvvrieqefxovspeveba.supabase.co/storage/v1/object/public/galleria/";
+    const key = fullUrl.replace(baseUrl, ""); // e.g. uploads/filename.jpg
+
+    // ✅ Step 2: Delete from Supabase Storage
     const { error: storageError } = await supabase
       .storage
-      .from("galleria") // Match your actual bucket name
+      .from("galleria")
       .remove([key]);
 
     if (storageError) {
@@ -147,11 +152,11 @@ app.delete("/api/gallery", async (req, res) => {
       return res.status(500).json({ error: "Failed to delete from storage" });
     }
 
-    // Step 2: Delete from database
+    // ✅ Step 3: Delete from database (exact full URL)
     const { error: dbError } = await supabase
       .from("gallery")
       .delete()
-      .eq("image_path", `/${key}`); // Ensure DB stores path with leading slash!
+      .eq("image_path", fullUrl);
 
     if (dbError) {
       console.error("DB deletion error:", dbError);

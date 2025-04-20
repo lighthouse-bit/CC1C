@@ -14,6 +14,10 @@ dotenv.config();
 
 const app = express();
 
+
+console.log("Supabase Key:", process.env.SUPABASE_KEY?.slice(0, 200)); 
+
+
 // Middleware
 app.use(cors());
 app.use(express.json());
@@ -112,6 +116,8 @@ app.post("/api/gallery/upload", upload.single("file"), async (req, res) => {
 
 
 
+
+
 // Fetch all gallery images
 app.get("/api/gallery", async (req, res) => {
   const { data, error } = await supabase.from("gallery").select("*").order("created_at", { ascending: false });
@@ -125,26 +131,21 @@ app.get("/api/gallery", async (req, res) => {
 });
 
 // Use parameter for dynamic file path in delete route
-app.delete("/api/gallery/:path", async (req, res) => {
-  try {
-    const imagePath = decodeURIComponent(req.params.path); // e.g. uploads/filename.jpg
-    console.log("Requested delete:", imagePath);
+app.delete("/api/gallery", async (req, res) => {
+  const { key } = req.query; // uploads/filename.jpg
+  if (!key) return res.status(400).json({ error: "Missing key" });
 
-    const { error: dbError } = await supabase
-      .from("gallery")
-      .delete()
-      .eq("image_path", `/${imagePath}`); // Assumes your file path is stored with the leading slash
+  const { error: dbError } = await supabase
+    .from("gallery")
+    .delete()
+    .eq("image_path", `/${key}`); // Ensure it matches the DB stored value (with slash)
 
-    if (dbError) {
-      console.error("Supabase delete error:", dbError);
-      return res.status(500).json({ error: "Database deletion failed" });
-    }
-
-    res.json({ message: "Image deleted" });
-  } catch (err) {
-    console.error("Delete error:", err);
-    res.status(500).json({ error: "Internal server error" });
+  if (dbError) {
+    console.error("Supabase delete error:", dbError);
+    return res.status(500).json({ error: "Database deletion failed" });
   }
+
+  res.json({ message: "Image deleted" });
 });
 
 // Fetch all roles

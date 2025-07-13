@@ -1,5 +1,7 @@
 import express from "express";
 import supabase from "../Database/db.js";
+import multer from "multer";
+const upload = multer({ storage: multer.memoryStorage() });
 
 const router = express.Router();
 
@@ -33,47 +35,107 @@ router.get("/:id", async (req, res) => {
 });
 
 // Create a new blog post (Admin only)
-router.post("/", async (req, res) => {
-  const { title, content, image, author } = req.body;
+router.post(
+  "/",
+  upload.fields([
+    { name: "image", maxCount: 1 },
+    { name: "authorImage", maxCount: 1 },
+  ]),
+  async (req, res) => {
+    const { title, content, author } = req.body;
+    const imageFile = req.files?.image?.[0];
+    const authorImageFile = req.files?.authorImage?.[0];
 
-  // Validate input
-  if (!title || !content || !image || !author) {
-    return res.status(400).json({ success: false, error: "All fields are required." });
+    // ✅ Only keep this single, correct validation block
+    if (!title || !content || !author || !imageFile || !authorImageFile) {
+      return res
+        .status(400)
+        .json({ success: false, error: "All fields including images are required." });
+    }
+
+    try {
+      const timestamp = Date.now();
+      const imagePath = `blogs/${timestamp}_${imageFile.originalname}`;
+      const authorPath = `authors/${timestamp}_${authorImageFile.originalname}`;
+
+      // ✅ Upload blog image to the "blog" bucket
+      const { error: imageError } = await supabase.storage
+        .from("blog")
+        .upload(imagePath, imageFile.buffer, {
+          contentType: imageFile.mimetype,
+          upsert: true,
+        });
+
+      // ✅ Upload author image to the "blog" bucket
+      const { error: authorError } = await supabase.storage
+        .from("blog")
+        .upload(authorPath, authorImageFile.buffer, {
+          contentType: authorImageFile.mimetype,
+          upsert: true,
+        });
+
+      if (imageError || authorError) {
+        return res
+          .status(500)
+          .json({ success: false, error: "Failed to upload image(s)" });
+      }
+
+      const blogImageURL = `https://fxvvrieqefxovspeveba.supabase.co/storage/v1/object/public/blog/${imagePath}`;
+      const authorImageURL = `https://fxvvrieqefxovspeveba.supabase.co/storage/v1/object/public/blog/${authorPath}`;
+
+      const { data, error: dbError } = await supabase
+        .from("blogs")
+        .insert([
+          {
+            title,
+            content,
+            author,
+            image: blogImageURL,
+            authorImage: authorImageURL,
+          },
+        ])
+        .select()
+        .single();
+
+      if (dbError) throw dbError;
+
+      res.status(201).json({
+        success: true,
+        message: "Blog post created successfully!",
+        blog: data,
+      });
+    } catch (err) {
+      console.error("Upload error:", err);
+      res
+        .status(500)
+        .json({ success: false, error: "Failed to create blog post." });
+    }
   }
+);
 
-  try {
-    // console.log("Creating new blog post:", req.body);
-    const { data, error } = await supabase.from("blogs").insert([{ title, content, image, author }]);
-    if (error) throw error;
 
-    res.status(201).json({ success: true, message: "Blog post created successfully!", blog: data });
-  } catch (err) {
-    console.error("Error creating blog post:", err);
-    res.status(500).json({ success: false, error: "Failed to create blog post." });
-  }
-});
 
 // Update a blog post (Admin only)
-router.put("/:id", async (req, res) => {
-  const { id } = req.params;
-  const { title, content, image, author } = req.body;
+// router.put("/:id", async (req, res) => {
+//   const { id } = req.params;
+//   const { title, content, image, author } = req.body;
 
-  // Validate input
-  if (!title || !content || !image || !author) {
-    return res.status(400).json({ success: false, error: "All fields are required." });
-  }
 
-  try {
-    // console.log(`Updating blog post with ID: ${id}`);
-    const { data, error } = await supabase.from("blogs").update({ title, content, image, author }).eq("id", id);
-    if (error) throw error;
+//   if (!title || !content || !image || !author) {
+//     return res.status(400).json({ success: false, error: "All fields are required." });
+//   }
 
-    res.json({ success: true, message: "Blog post updated successfully!", blog: data });
-  } catch (err) {
-    console.error(`Error updating blog post with ID ${id}:`, err);
-    res.status(500).json({ success: false, error: "Failed to update blog post." });
-  }
-});
+//   try {
+    
+//     const { data, error } = await supabase.from("blogs").update({ title, content, image, author }).eq("id", id);
+//     if (error) throw error;
+
+//     res.json({ success: true, message: "Blog post updated successfully!", blog: data });
+//   } catch (err) {
+//     console.error(`Error updating blog post with ID ${id}:`, err);
+//     res.status(500).json({ success: false, error: "Failed to update blog post." });
+//   }
+// });
 
 // Delete a blog post (Admin only)
 router.delete("/:id", async (req, res) => {

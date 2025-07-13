@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Button } from "../ui/button";
+// import { Button } from "../ui/button";
 import { Link } from "react-router-dom";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
@@ -121,7 +121,8 @@ const ToGallery = () => {
           </div>
         )}
       </div>
-      <Link to='/admin/gallery-del'><Button classname='mt-14'>Manage Gallery</Button></Link>
+      
+      <Link to='/admin/gallery-del'><button className="mt-14">Manage Gallery</button></Link>
     </div>
   );
 };

@@ -38,7 +38,7 @@ const BlogSection = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
         {blogs.map((post) => (
           <Link key={post.id} to={`/blog/${post.id}`} className="bg-white shadow-md rounded-lg overflow-hidden">
-            <img src={`${API_BASE_URL}${post.image}`} alt={post.title} className="w-full h-auto" />
+            <img src={post.image} alt={post.title} className="w-full h-auto" />
             <div className="p-4">
               <h4 className="text-blue-900 font-bold text-sm leading-tight">{post.title}</h4>
               <p className="text-gray-700 text-sm mt-2">
@@ -46,7 +46,7 @@ const BlogSection = () => {
               </p>
               <div className="flex items-center mt-4">
                 <img 
-                src={founder3}
+                src={post.authorImage}
                 alt={post.author} 
                 className="w-8 h-8 rounded-full mr-2"
                 />

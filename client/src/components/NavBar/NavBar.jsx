@@ -154,6 +154,9 @@ const NavBar = () => {
                   <li className="hover:bg-gray-100 px-4 py-2">
                     <Link to="programs/sustainable-farming">Sustainable Farming</Link>
                   </li>
+                  <li className="hover:bg-gray-100 px-4 py-2">
+                    <Link to="programs/sustainable-farming">Clean Cooking Advocacy and Bioenergy Solutions</Link>
+                  </li>
                 </ul>
               )}
             </li>

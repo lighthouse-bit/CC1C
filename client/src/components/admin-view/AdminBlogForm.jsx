@@ -47,25 +47,43 @@ const AdminBlogForm = () => {
     setError("");
 
     try {
+      const form = new FormData();
+      form.append("title", formData.title);
+      form.append("content", formData.content);
+      form.append("author", formData.author);
+      if (formData.image) form.append("image", formData.image);
+      if (formData.authorImage) form.append("authorImage", formData.authorImage);
+
       const response = await fetch(`${API_BASE_URL}/api/blogs`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: form, 
       });
 
-      const text = await response.text(); // Get raw response before parsing
-      console.log("Raw Response:", text); // Log response
-
-      const data = JSON.parse(text); // Manually parse JSON
+      const data = await response.json();
       if (!response.ok) throw new Error(data.error || "Something went wrong");
 
       setMessage("Blog post created successfully!");
-      setFormData({ title: "", content: "", image: "", author: "", authorImage: "" });
+      setFormData({
+        title: "",
+        content: "",
+        image: null,
+        author: "",
+        authorImage: null,
+      });
+
+      for (let pair of form.entries()) {
+          console.log(`${pair[0]}:`, pair[1]);
+        }
+
       fetchBlogs();
     } catch (err) {
       setError(err.message);
     }
   };
+
+
+
+
 
   const handleDelete = async (id) => {
     try {
@@ -100,9 +118,17 @@ const AdminBlogForm = () => {
         </div>
 
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">Image URL</label>
-          <input type="text" name="image" value={formData.image} onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded-md" placeholder="https://example.com/image.jpg" />
+          <label className="block text-sm font-medium text-gray-700">Blog Image</label>
+          <input
+            type="file"
+            accept="image/*"
+            name="image"
+            onChange={(e) =>
+              setFormData({ ...formData, image: e.target.files[0] })
+            }
+            required
+            className="w-full p-2 border border-gray-300 rounded-md"
+          />
         </div>
 
         <div className="mb-4">
@@ -112,9 +138,17 @@ const AdminBlogForm = () => {
         </div>
 
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">Author Image URL</label>
-          <input type="text" name="authorImage" value={formData.authorImage} onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded-md" placeholder="https://example.com/author.jpg" />
+          <label className="block text-sm font-medium text-gray-700">Author Image</label>
+          <input
+            type="file"
+            accept="image/*"
+            name="authorImage"
+            onChange={(e) =>
+              setFormData({ ...formData, authorImage: e.target.files[0] })
+            }
+            required
+            className="w-full p-2 border border-gray-300 rounded-md"
+          />
         </div>
 
         <button type="submit" className="bg-blue-600 text-white py-2 px-4 rounded-md">

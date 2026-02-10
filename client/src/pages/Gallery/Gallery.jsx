@@ -1,0 +1,83 @@
+import { useEffect, useState } from "react";
+import axios from 'axios';
+
+const categories = [
+  "All Photos", "Conferences", "Trainings", "Advocacy Efforts", "Community Outreach", "Programs"
+];
+
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
+const Gallery = () => {
+  const [selectedCategory, setSelectedCategory] = useState("All Photos");
+  const [images, setImages] = useState([]);
+  const [selectedImage, setSelectedImage] = useState(null);
+   const [loading, setLoading] = useState(true);
+
+  // Fetch gallery images
+  useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        const response = await axios.get(`${API_BASE_URL}/api/gallery`);
+        setImages(response.data);
+      } catch (error) {
+        console.error('Error fetching images:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchImages();
+  }, []);
+
+  const filteredImages = selectedCategory === "All Photos" 
+    ? images 
+    : images.filter(img => img.category === selectedCategory);
+
+
+  if (loading) return <div className="text-center py-10 text-gray-500">Loading gallery...</div>;
+  return (
+    <div className="container mx-auto p-4">
+      <h1 className="text-xl font-bold mb-4 text-blue-900">GALLERY</h1>
+      <hr className="mb-20" />
+
+      {/* Category Buttons */}
+      <div className="flex gap-2 flex-wrap mb-4">
+        {categories.map((category, index) => (
+          <button
+            key={index}
+            className={`px-3 py-1 border rounded-md ${selectedCategory === category ? "bg-[#052F6B] text-white" : "bg-gray-200"}`}
+            onClick={() => setSelectedCategory(category)}
+          >
+            {category}
+          </button>
+        ))}
+      </div>
+
+      {/* Image Grid */}
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {filteredImages.map((img, index) => (
+          <img
+            key={index}
+            src={img.image_path}
+
+            alt={`Gallery ${index}`}
+            className="w-full h-auto rounded-md shadow-md cursor-pointer hover:scale-105 transition-transform"
+            onClick={() => setSelectedImage((img.image_path))}
+          />
+        ))}
+      </div>
+
+      {/* Image Modal */}
+      {selectedImage && (
+        <div
+          className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-80 z-50"
+          onClick={() => setSelectedImage(null)}
+        >
+          <img src={selectedImage} alt="Enlarged" className="max-w-full max-h-full rounded-lg shadow-lg" />
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Gallery;
